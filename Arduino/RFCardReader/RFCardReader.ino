@@ -22,6 +22,13 @@
 #define LCDD7 2
 
 //RW to ground
+
+/*LED vars*/
+//pin 6 green led
+#define LEDGREED 6
+
+//pin 7 red led
+#define LEDRED 7
 #pragma endregion
 
 //Setup LCD Pins, Save in PROGMEM (Flash storge) as we don't need to change it after compile
@@ -46,6 +53,13 @@ void setup()
 	//LCD columns and rows, small is 16 columns on ech row (2 in total)
 	lcd.begin(16, 2);
 	lcd.print(readCard);
+
+	//led
+	pinMode(LEDGREED, OUTPUT);
+	pinMode(LEDRED, OUTPUT);
+
+	digitalWrite(LEDGREED, HIGH);
+	digitalWrite(LEDRED, HIGH);
 }
 
 void loop() 
