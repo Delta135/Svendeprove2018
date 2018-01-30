@@ -26,7 +26,6 @@
 
 //Setup LCD Pins, Save in PROGMEM (Flash storge) as we don't need to change it after compile
 //https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
-//const PROGMEM byte RS = 12, Enable = 11, D4 = 5, D5 = 4, D6 = 3, D7 = 2;
 
 //LCD strings
 const PROGMEM String readCard = "Swipe Armbaand";
@@ -39,7 +38,6 @@ const PROGMEM String error = "Fejl";
 const PROGMEM String outOfService = "Ikke i service";
 
 //Setup LCD
-//LiquidCrystal lcd(RS, Enable, D4, D5, D6, D7);
 LiquidCrystal lcd(LCDRS, LCDE, LCDD4, LCDD5, LCDD6, LCDD7);
 
 void setup() 
