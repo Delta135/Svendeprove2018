@@ -84,8 +84,8 @@ const PROGMEM byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
 EthernetClient client;
 
 //Test
-const byte cardID[4] = {172, 12, 63, 213};
 byte inputID[4];
+const byte cardUID[4] = {172, 12, 63, 213};
 
 void setup() 
 {
@@ -125,70 +125,19 @@ void loop()
 	if (!rfid.PICC_ReadCardSerial())
 		return;
 
-	Serial.print(F("RF UID:  "));
-
 	// Halt PICC
 	rfid.PICC_HaltA();
 
 	// Stop encryption on PCD
 	rfid.PCD_StopCrypto1();
 
-	//printDec(rfid.uid.uidByte, rfid.uid.size);
-	//Serial.println();
-
-	for (byte i = 0; i < rfid.uid.size; i++)
+	if (checkUID(rfid.uid.uidByte, cardUID, 4))
 	{
-		Serial.print(rfid.uid.uidByte[i]);
+		Serial.println("YAY");
 	}
-
-	Serial.println();
-
-	Serial.print("cardID:  ");
-	for (byte i = 0; i < 4; i++)
+	else
 	{
-		Serial.print(cardID[i]);
-	}
-
-	getUID(rfid.uid.uidByte, 4, inputID);
-
-	Serial.println();
-
-	Serial.print("inputID: ");
-	for (byte i = 0; i < 4; i++)
-	{
-		Serial.print(inputID[i]);
-	}
-
-	
-}
-
-//https://github.com/miguelbalboa/rfid/blob/master/examples/ReadNUID/ReadNUID.ino
-//bytes to DEC
-void printDec(byte *buffer, byte bufferSize) 
-{
-	for (byte i = 0; i < bufferSize; i++) 
-	{
-		//Serial.print(buffer[i] < 0x10 ? " 0" : " ");
-
-		if (buffer[i] < 0x10)
-		{
-			Serial.print(" 0");
-		}
-		else
-		{
-			Serial.print(" ");
-		}
-
-		Serial.print(buffer[i], DEC);
-	}
-}
-
-//copy UID to temp var
-void getUID(byte *buffer, byte bufferSize, byte *intput)
-{
-	for (byte i = 0; i < bufferSize; i++)
-	{
-		intput[i] = buffer[i];
+		Serial.println("NAY");
 	}
 }
 
@@ -197,4 +146,20 @@ void printLCDAndSerial(String msg)
 	lcd.clear();
 	lcd.print(msg);
 	Serial.println(msg);
+}
+
+//move to db?
+bool checkUID(byte *UID1, byte *UID2, byte UIDSize)
+{
+	bool match = true;
+	for (byte i = 0; i < UIDSize; i++)
+	{
+		if (UID1[i] != UID2[i])
+		{
+			match = false;
+			break;
+		}
+	}
+
+	return match;
 }
