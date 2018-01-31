@@ -131,14 +131,32 @@ void loop()
 	// Stop encryption on PCD
 	rfid.PCD_StopCrypto1();
 
+	printLCDAndSerial(wait);
+	digitalWrite(LEDGREED, LOW);
+	digitalWrite(LEDRED, HIGH);
+	
+	//simulate network
+	delay(1000);
+
+	//temp
 	if (checkUID(rfid.uid.uidByte, cardUID, 4)) //<- ingnore the error, it compiles and works fine :)
 	{
-		Serial.println("YAY");
+		printLCDAndSerial(ok);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
 	}
 	else
 	{
-		Serial.println("NAY");
+		printLCDAndSerial(error);
+		digitalWrite(LEDGREED, LOW);
+		digitalWrite(LEDRED, LOW);
 	}
+
+	delay(1000);
+
+	printLCDAndSerial(readCard);
+	digitalWrite(LEDGREED, HIGH);
+	digitalWrite(LEDRED, LOW);
 }
 
 void printLCDAndSerial(String msg)
