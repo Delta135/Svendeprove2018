@@ -131,7 +131,7 @@ void loop()
 	// Stop encryption on PCD
 	rfid.PCD_StopCrypto1();
 
-	if (checkUID(rfid.uid.uidByte, cardUID, 4))
+	if (checkUID(rfid.uid.uidByte, cardUID, 4)) //<- ingnore the error, it compiles and works fine :)
 	{
 		Serial.println("YAY");
 	}
