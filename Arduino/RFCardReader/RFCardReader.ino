@@ -37,10 +37,10 @@
 
 /*LED vars*/
 //pin 6 green led
-#define LEDGREED 22
+#define LEDGREED 30
 
 //pin 7 red led
-#define LEDRED 23
+#define LEDRED 31
 
 /*RFID*/
 //RST pin 6
@@ -83,16 +83,14 @@ MFRC522::MIFARE_Key rfKey;
 const PROGMEM byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
 EthernetClient client;
 
+//Test
+const byte cardID[4] = {172, 12, 63, 213};
+byte inputID[4];
+
 void setup() 
 {
 	Serial.begin(9600);
 	Serial.println(F("Starting..."));
-
-	//LCD
-	//LCD columns and rows, small is 16 columns on ech row (2 in total)
-	Serial.println(F("Setting Up LCD..."));
-	lcd.begin(LCDCOLUMNS, LCDROWS);
-	lcd.print(readCard);
 
 	//led
 	Serial.println(F("Setting Up LED..."));
@@ -100,7 +98,13 @@ void setup()
 	pinMode(LEDRED, OUTPUT);
 
 	digitalWrite(LEDGREED, HIGH);
-	digitalWrite(LEDRED, HIGH);
+	digitalWrite(LEDRED, LOW);
+
+	//LCD
+	//LCD columns and rows, small is 16 columns on ech row (2 in total)
+	Serial.println(F("Setting Up LCD..."));
+	lcd.begin(LCDCOLUMNS, LCDROWS);
+	lcd.print(readCard);
 
 	//RFID
 	Serial.println(F("Setting Up RFID..."));
@@ -121,15 +125,41 @@ void loop()
 	if (!rfid.PICC_ReadCardSerial())
 		return;
 
-	Serial.print(F("RF UID: "));
-	printDec(rfid.uid.uidByte, rfid.uid.size);
-	Serial.println();
+	Serial.print(F("RF UID:  "));
 
 	// Halt PICC
 	rfid.PICC_HaltA();
 
 	// Stop encryption on PCD
 	rfid.PCD_StopCrypto1();
+
+	//printDec(rfid.uid.uidByte, rfid.uid.size);
+	//Serial.println();
+
+	for (byte i = 0; i < rfid.uid.size; i++)
+	{
+		Serial.print(rfid.uid.uidByte[i]);
+	}
+
+	Serial.println();
+
+	Serial.print("cardID:  ");
+	for (byte i = 0; i < 4; i++)
+	{
+		Serial.print(cardID[i]);
+	}
+
+	getUID(rfid.uid.uidByte, 4, inputID);
+
+	Serial.println();
+
+	Serial.print("inputID: ");
+	for (byte i = 0; i < 4; i++)
+	{
+		Serial.print(inputID[i]);
+	}
+
+	
 }
 
 //https://github.com/miguelbalboa/rfid/blob/master/examples/ReadNUID/ReadNUID.ino
@@ -138,7 +168,33 @@ void printDec(byte *buffer, byte bufferSize)
 {
 	for (byte i = 0; i < bufferSize; i++) 
 	{
-		Serial.print(buffer[i] < 0x10 ? " 0" : " ");
+		//Serial.print(buffer[i] < 0x10 ? " 0" : " ");
+
+		if (buffer[i] < 0x10)
+		{
+			Serial.print(" 0");
+		}
+		else
+		{
+			Serial.print(" ");
+		}
+
 		Serial.print(buffer[i], DEC);
 	}
+}
+
+//copy UID to temp var
+void getUID(byte *buffer, byte bufferSize, byte *intput)
+{
+	for (byte i = 0; i < bufferSize; i++)
+	{
+		intput[i] = buffer[i];
+	}
+}
+
+void printLCDAndSerial(String msg)
+{
+	lcd.clear();
+	lcd.print(msg);
+	Serial.println(msg);
 }
