@@ -65,7 +65,7 @@
 #define EhternetSPI4 13
 #pragma endregion
 
-//Setup LCD Pins, Save in PROGMEM (Flash storge) as we don't need to change it after compile
+//Save in PROGMEM (Flash storge) as we don't need to change it after compile
 //https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
 
 //LCD strings
@@ -87,6 +87,7 @@ MFRC522::MIFARE_Key rfKey;
 
 //Setup ethernet
 const PROGMEM byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
+const PROGMEM IPAddress IP = { 128, 0, 0,1 };
 EthernetClient client;
 
 //Test
@@ -118,7 +119,6 @@ void setup()
 	rfid.PCD_Init();
 
 	//Ethernet
-	
 }
 
 void loop()
@@ -165,6 +165,7 @@ void loop()
 	digitalWrite(LEDRED, LOW);
 }
 
+//for debug
 void printLCDAndSerial(String msg)
 {
 	lcd.clear();
@@ -172,7 +173,68 @@ void printLCDAndSerial(String msg)
 	Serial.println(msg);
 }
 
-//move to db?
+//TODO
+void initLED()
+{
+
+}
+
+//TODO
+void initLCD()
+{
+
+}
+
+//TODO
+void initREID()
+{
+
+}
+
+//TODO
+void initEhternet()
+{
+
+}
+
+//TODO
+void LCDPrint(String msg)
+{
+
+}
+
+//TODO
+void toggleLEDs(byte LED1, byte LED2)
+{
+
+}
+
+//TODO
+//NOTE: Can't return arrays in C, use pointers to manipulate them
+void scanCard(byte *UID)
+{
+
+}
+
+//TODO
+bool connectToServer()
+{
+	return NULL;
+}
+
+//TODO
+void sendUID()
+{
+
+}
+
+//TODO
+bool getResponse()
+{
+	return NULL;
+}
+
+//debug
 bool checkUID(byte *UID1, byte *UID2, byte UIDSize)
 {
 	bool match = true;
