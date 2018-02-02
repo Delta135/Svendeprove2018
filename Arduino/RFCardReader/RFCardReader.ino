@@ -11,11 +11,11 @@
 
 #pragma region Defines
 /*LCD vars*/
-//RS digital 12
-#define LCDRS 12
+//RS digital 9
+#define LCDRS 9
 
-//Enable digital 11
-#define LCDE 11
+//Enable digital 8
+#define LCDE 8
 
 //D4 digital 5
 #define LCDD4 5
@@ -37,10 +37,10 @@
 
 /*LED vars*/
 //pin 6 green led
-#define LEDGREED 30
+#define LEDGREED 48
 
 //pin 7 red led
-#define LEDRED 31
+#define LEDRED 49
 
 /*RFID*/
 //RST pin 6
@@ -57,6 +57,12 @@
 
 //SDA/SS pin 53
 #define RFIDSDA 53
+
+//Reserved Etherner pins
+#define EhternetSPI1 10
+#define EhternetSPI2 11
+#define EhternetSPI3 12
+#define EhternetSPI4 13
 #pragma endregion
 
 //Setup LCD Pins, Save in PROGMEM (Flash storge) as we don't need to change it after compile
