@@ -69,6 +69,7 @@
 //https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
 
 //LCD strings
+//https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/
 const PROGMEM String readCard = "Swipe Armbaand";
 const PROGMEM String wait = "Vent...";
 const PROGMEM String ok = "OK!";
@@ -91,8 +92,8 @@ const PROGMEM IPAddress IP = { 128, 0, 0,1 };
 EthernetClient client;
 
 //Test
-byte inputID[4];
 const byte cardUID[4] = {172, 12, 63, 213};
+const byte UIDlength = 4;
 
 void setup() 
 {
@@ -145,7 +146,7 @@ void loop()
 	delay(1000);
 
 	//temp
-	if (checkUID(rfid.uid.uidByte, cardUID, 4)) //<- ingnore the error, it compiles and works fine :)
+	if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
 	{
 		printLCDAndSerial(ok);
 		digitalWrite(LEDGREED, HIGH);
@@ -166,7 +167,7 @@ void loop()
 }
 
 //for debug
-void printLCDAndSerial(String msg)
+void printLCDAndSerial(const String &msg)
 {
 	lcd.clear();
 	lcd.print(msg);
@@ -198,20 +199,20 @@ void initEhternet()
 }
 
 //TODO
-void LCDPrint(String msg)
+void LCDPrint(const String &msg)
 {
 
 }
 
 //TODO
-void toggleLEDs(byte LED1, byte LED2)
+void toggleLEDs(const byte &LED1, const byte &LED2)
 {
 
 }
 
 //TODO
 //NOTE: Can't return arrays in C, use pointers to manipulate them
-void scanCard(byte *UID)
+void scanCard(const byte *UID)
 {
 
 }
@@ -235,7 +236,7 @@ bool getResponse()
 }
 
 //debug
-bool checkUID(byte *UID1, byte *UID2, byte UIDSize)
+bool checkUID(const byte *UID1, const byte *UID2, const byte &UIDSize)
 {
 	bool match = true;
 	for (byte i = 0; i < UIDSize; i++)
