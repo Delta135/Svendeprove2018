@@ -87,8 +87,9 @@ MFRC522 rfid(RFIDSDA, RFIDRST);
 MFRC522::MIFARE_Key rfKey;
 
 //Setup ethernet
-const PROGMEM byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
-const PROGMEM IPAddress IP = { 128, 0, 0,1 };
+byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
+IPAddress ArduinoIP = { 172, 16, 1, 50};
+IPAddress ServerIP = {172, 16, 1, 4};
 EthernetClient client;
 
 //Test
@@ -120,50 +121,69 @@ void setup()
 	rfid.PCD_Init();
 
 	//Ethernet
+	Serial.println(F("Setting Up Ehternet"));
 }
 
 void loop()
 {
-	//wait for new card
-	if (!rfid.PICC_IsNewCardPresent())
-		return;
+	Ethernet.begin(MAC, ArduinoIP);
 
-	//Verify if the NUID has been readed
-	if (!rfid.PICC_ReadCardSerial())
-		return;
-
-	// Halt PICC
-	rfid.PICC_HaltA();
-
-	// Stop encryption on PCD
-	rfid.PCD_StopCrypto1();
-
-	printLCDAndSerial(wait);
-	digitalWrite(LEDGREED, LOW);
-	digitalWrite(LEDRED, HIGH);
-	
-	//simulate network
 	delay(1000);
 
-	//temp
-	if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
+	if (client.connect(ServerIP, 80))
 	{
-		printLCDAndSerial(ok);
-		digitalWrite(LEDGREED, HIGH);
-		digitalWrite(LEDRED, LOW);
+		Serial.println(F("Connected!"));
 	}
 	else
 	{
-		printLCDAndSerial(error);
-		digitalWrite(LEDGREED, LOW);
-		digitalWrite(LEDRED, LOW);
+		Serial.println(F("Connection failed"));
 	}
 
-	delay(1000);
+	while (true)
+	{
+		;
+	}
 
-	printLCDAndSerial(readCard);
-	digitalWrite(LEDGREED, HIGH);
-	digitalWrite(LEDRED, LOW);
+	////wait for new card
+	//if (!rfid.PICC_IsNewCardPresent())
+	//	return;
+
+	////Verify if the NUID has been readed
+	//if (!rfid.PICC_ReadCardSerial())
+	//	return;
+
+	//// Halt PICC
+	//rfid.PICC_HaltA();
+
+	//// Stop encryption on PCD
+	//rfid.PCD_StopCrypto1();
+
+	//printLCDAndSerial(wait);
+	//digitalWrite(LEDGREED, LOW);
+	//digitalWrite(LEDRED, HIGH);
+	//
+	////simulate network
+	//delay(1000);
+
+	////temp
+	//if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
+	//{
+	//	printLCDAndSerial(ok);
+	//	digitalWrite(LEDGREED, HIGH);
+	//	digitalWrite(LEDRED, LOW);
+	//}
+	//else
+	//{
+	//	printLCDAndSerial(error);
+	//	digitalWrite(LEDGREED, LOW);
+	//	digitalWrite(LEDRED, LOW);
+	//}
+
+	//delay(1000);
+
+	//printLCDAndSerial(readCard);
+	//digitalWrite(LEDGREED, HIGH);
+	//digitalWrite(LEDRED, LOW);
 }
 
 //for debug
@@ -239,15 +259,13 @@ bool getResponse()
 //debug
 bool checkUID(const byte *UID1, const byte *UID2, const byte &UIDSize)
 {
-	bool match = true;
 	for (byte i = 0; i < UIDSize; i++)
 	{
 		if (UID1[i] != UID2[i])
 		{
-			match = false;
-			break;
+			return false;
 		}
 	}
 
-	return match;
+	return true;
 }
