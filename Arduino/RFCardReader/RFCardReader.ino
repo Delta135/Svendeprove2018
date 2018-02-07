@@ -212,6 +212,7 @@ void toggleLEDs(const byte &LED1, const byte &LED2)
 
 //TODO
 //NOTE: Can't return arrays in C, use pointers to manipulate them
+//might have to remove const... see string link in the top
 void scanCard(const byte *UID)
 {
 
