@@ -122,27 +122,40 @@ void setup()
 
 	//Ethernet
 	Serial.println(F("Setting Up Ehternet"));
-}
 
-void loop()
-{
-	Ethernet.begin(MAC, ArduinoIP);
+	if (Ethernet.begin(MAC) == 1)
+	{
+		Serial.println(F("Ehternet config done."));
+	}
+	else
+	{
+		Serial.println(F("Ehternet config failed."));
 
+		//do nothing forever
+		for (;;) {}
+	}
+
+	//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
 	if (client.connect(ServerIP, 80))
 	{
 		Serial.println(F("Connected!"));
+
+		Serial.println(F("IP:"));
+		Serial.println(Ethernet.localIP());
 	}
 	else
 	{
 		Serial.println(F("Connection failed"));
-	}
 
-	while (true)
-	{
-		;
+		//stop the arduino form keeping connecting
+		for (;;) {}
 	}
+}
+
+void loop()
+{
 
 	////wait for new card
 	//if (!rfid.PICC_IsNewCardPresent())
