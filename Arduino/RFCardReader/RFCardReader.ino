@@ -95,6 +95,7 @@ EthernetClient client;
 //Test
 const byte cardUID[4] = {172, 12, 63, 213};
 const byte UIDlength = 4;
+IPAddress PCIP = { 172, 16, 1, 1 };
 
 void setup() 
 {
@@ -123,27 +124,33 @@ void setup()
 	//Ethernet
 	Serial.println(F("Setting Up Ehternet"));
 
-	if (Ethernet.begin(MAC) == 1)
-	{
-		Serial.println(F("Ehternet config done."));
-	}
-	else
-	{
-		Serial.println(F("Ehternet config failed."));
+	//if (Ethernet.begin(MAC) == 1)
+	//{
+	//	Serial.println(F("Ehternet config done."));
+	//}
+	//else
+	//{
+	//	Serial.println(F("Ehternet config failed."));
 
-		//do nothing forever
-		for (;;) {}
-	}
+	//	//do nothing forever
+	//	for (;;) {}
+	//}
+
+	Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
 
 	//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
-	if (client.connect(ServerIP, 80))
+	//if (client.connect(ServerIP, 80))
+	if (client.connect(PCIP, 80))
 	{
 		Serial.println(F("Connected!"));
 
 		Serial.println(F("IP:"));
 		Serial.println(Ethernet.localIP());
+
+		//send test data
+		client.write("Test");
 	}
 	else
 	{

@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWU-Website", "NWU-Website\NWU-Website.csproj", "{2DE6931F-822E-4244-AB05-AD266D0737F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoConnector", "ArduinoConnector\ArduinoConnector.csproj", "{0DF81023-0B22-4A0C-9066-79AE5E435CC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2DE6931F-822E-4244-AB05-AD266D0737F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE6931F-822E-4244-AB05-AD266D0737F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE6931F-822E-4244-AB05-AD266D0737F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF81023-0B22-4A0C-9066-79AE5E435CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF81023-0B22-4A0C-9066-79AE5E435CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF81023-0B22-4A0C-9066-79AE5E435CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF81023-0B22-4A0C-9066-79AE5E435CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
