@@ -56,8 +56,14 @@ namespace ArduinoConnector
 
                     Console.WriteLine();
 
-                    Console.WriteLine(System.Text.Encoding.ASCII.GetString(buffer, 0, buffer.Length));
+                    Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, buffer.Length));
                     Console.WriteLine("Done");
+                    Console.WriteLine("Will now talk back...");
+
+                    buffer = Encoding.ASCII.GetBytes("Thanks.");
+                    stream.Write(buffer, 0, buffer.Length);
+
+                    Console.WriteLine("Sendt.");
 
                     for (;;) { }
                 }

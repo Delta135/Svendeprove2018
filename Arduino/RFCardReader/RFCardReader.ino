@@ -151,6 +151,21 @@ void setup()
 
 		//send test data
 		client.write("Test");
+
+		//recive data
+		//uint8_t rbuffer[10];
+		//client.read(rbuffer, 10);
+
+		//Serial.println("Got:");
+		//for (size_t i = 0; i < 10; i++)
+		//{
+		//	Serial.print(rbuffer[i]);
+		//}
+		//Serial.println();
+
+		String recive = client.readString();
+		Serial.println(recive);
+		
 	}
 	else
 	{
