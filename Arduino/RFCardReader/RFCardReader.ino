@@ -151,7 +151,7 @@ void setup()
 		Serial.println(Ethernet.localIP());
 
 		//send data
-		client.print(F("GET /index.php?data="));
+		client.print(F("GET /InsertData.php?data="));
 		client.write(cardUID, 4);
 		client.println(F(" HTTP/1.1"));
 		client.print(F("HOST: "));
@@ -159,11 +159,15 @@ void setup()
 
 		Serial.println("Sendt data.");
 
+		//delay
+		//delay(1000);
+
 		//recive data
 		Serial.println(F("Got:"));
 		String recive = client.readString();
 		Serial.println(recive);
-		
+
+		for (;;) {}
 	}
 	else
 	{
