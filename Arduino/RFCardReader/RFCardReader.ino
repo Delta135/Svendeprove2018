@@ -124,25 +124,26 @@ void setup()
 	//Ethernet
 	Serial.println(F("Setting Up Ehternet"));
 
-	//if (Ethernet.begin(MAC) == 1)
-	//{
-	//	Serial.println(F("Ehternet config done."));
-	//}
-	//else
-	//{
-	//	Serial.println(F("Ehternet config failed."));
+	//Use to connect to server
+	if (Ethernet.begin(MAC) == 1)
+	{
+		Serial.println(F("Ehternet config done."));
+	}
+	else
+	{
+		Serial.println(F("Ehternet config failed."));
 
-	//	//do nothing forever
-	//	for (;;) {}
-	//}
+		//do nothing forever
+		for (;;) {}
+	}
 
-	Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
+	//Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
 
 	//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
-	//if (client.connect(ServerIP, 80))
-	if (client.connect(PCIP, 80))
+	if (client.connect(ServerIP, 80))
+	//if (client.connect(PCIP, 80))
 	{
 		Serial.println(F("Connected!"));
 
@@ -150,10 +151,16 @@ void setup()
 		Serial.println(Ethernet.localIP());
 
 		//send data
-		client.write("Test");
+		client.print(F("GET /index.php?data="));
+		client.write(cardUID, 4);
+		client.println(F(" HTTP/1.1"));
+		client.print(F("HOST: "));
+		client.println(ServerIP);
+
+		Serial.println("Sendt data.");
 
 		//recive data
-		Serial.println("Got:");
+		Serial.println(F("Got:"));
 		String recive = client.readString();
 		Serial.println(recive);
 		
