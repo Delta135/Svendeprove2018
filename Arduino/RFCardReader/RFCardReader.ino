@@ -149,20 +149,11 @@ void setup()
 		Serial.println(F("IP:"));
 		Serial.println(Ethernet.localIP());
 
-		//send test data
+		//send data
 		client.write("Test");
 
 		//recive data
-		//uint8_t rbuffer[10];
-		//client.read(rbuffer, 10);
-
-		//Serial.println("Got:");
-		//for (size_t i = 0; i < 10; i++)
-		//{
-		//	Serial.print(rbuffer[i]);
-		//}
-		//Serial.println();
-
+		Serial.println("Got:");
 		String recive = client.readString();
 		Serial.println(recive);
 		
