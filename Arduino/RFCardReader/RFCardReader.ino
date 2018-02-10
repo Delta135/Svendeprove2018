@@ -218,24 +218,30 @@ void loop()
 	Serial.println(*rbuffer);
 
 	//temp
-	//if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
-	//{
-	//	printLCDAndSerial(ok);
-	//	digitalWrite(LEDGREED, HIGH);
-	//	digitalWrite(LEDRED, LOW);
-	//}
-	//else
-	//{
-	//	printLCDAndSerial(error);
-	//	digitalWrite(LEDGREED, LOW);
-	//	digitalWrite(LEDRED, LOW);
-	//}
+	if (*rbuffer == 1)
+	{
+		printLCDAndSerial(ok);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+	}
+	if (*rbuffer == 2)
+	{
+		printLCDAndSerial(denied);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+	}
+	else
+	{
+		printLCDAndSerial(error);
+		digitalWrite(LEDGREED, LOW);
+		digitalWrite(LEDRED, LOW);
+	}
 
-	//delay(1000);
+	delay(1000);
 
-	//printLCDAndSerial(readCard);
-	//digitalWrite(LEDGREED, HIGH);
-	//digitalWrite(LEDRED, LOW);
+	printLCDAndSerial(readCard);
+	digitalWrite(LEDGREED, HIGH);
+	digitalWrite(LEDRED, LOW);
 }
 
 //for debug

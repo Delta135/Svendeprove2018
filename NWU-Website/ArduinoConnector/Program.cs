@@ -58,19 +58,51 @@ namespace ArduinoConnector
 
                     Console.WriteLine();
                     byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
+                    bool checkInd = true, same = false;
 
-                    for (int i = 0; i < buffer.Length; i++)
+                    for (int i = 0; i < fakeDB.Length; i++)
                     {
                         if (buffer[i] != fakeDB[i])
                         {
-                            Console.WriteLine("Worng");
-                            buffer = new byte[] { 0 };
+                            same = false;
                             break;
                         }
-
-                        Console.WriteLine("Same");
-                        buffer = new byte[] { 1 };
+                        else
+                        {
+                            same = true;
+                        }
                     }
+
+                    if (same)
+                    {
+                        Console.WriteLine("Same");
+                        if (checkInd)
+                        {
+                            buffer = new byte[] { 2 }; //checkud
+                        }
+                        else
+                        {
+                            buffer = new byte[] { 1 };
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Worng");
+                        buffer = new byte[] { 0 };
+                    }
+
+                    //for (int i = 0; i < buffer.Length; i++)
+                    //{
+                    //    if (buffer[i] != fakeDB[i])
+                    //    {
+                    //        Console.WriteLine("Worng");
+                    //        buffer = new byte[] { 0 };
+                    //        break;
+                    //    }
+
+                    //    Console.WriteLine("Same");
+                    //    buffer = new byte[] { 1 };
+                    //}
                     
                     Console.WriteLine("Done");
                     Console.WriteLine("Will now talk back...");
