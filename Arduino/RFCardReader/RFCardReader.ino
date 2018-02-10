@@ -125,25 +125,25 @@ void setup()
 	Serial.println(F("Setting Up Ehternet"));
 
 	//Use to connect to server
-	if (Ethernet.begin(MAC) == 1)
-	{
-		Serial.println(F("Ehternet config done."));
-	}
-	else
-	{
-		Serial.println(F("Ehternet config failed."));
+	//if (Ethernet.begin(MAC) == 1)
+	//{
+	//	Serial.println(F("Ehternet config done."));
+	//}
+	//else
+	//{
+	//	Serial.println(F("Ehternet config failed."));
 
-		//do nothing forever
-		for (;;) {}
-	}
+	//	//do nothing forever
+	//	for (;;) {}
+	//}
 
-	//Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
+	Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
 
 	//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
-	if (client.connect(ServerIP, 80))
-	//if (client.connect(PCIP, 80))
+	//if (client.connect(ServerIP, 80))
+	if (client.connect(PCIP, 80))
 	{
 		Serial.println(F("Connected!"));
 
@@ -151,13 +151,18 @@ void setup()
 		Serial.println(Ethernet.localIP());
 
 		//send data
-		client.print(F("GET /InsertData.php?data="));
-		client.write(cardUID, 4);
-		client.println(F(" HTTP/1.1"));
-		client.print(F("HOST: "));
-		client.println(ServerIP);
+		//PHP
+		//client.print(F("GET /InsertData.php?data="));
+		//client.write(cardUID, 4);
+		//client.println(F(" HTTP/1.1"));
+		//client.print(F("HOST: "));
+		//client.println(ServerIP);
 
-		Serial.println("Sendt data.");
+		//Serial.println(F("Sendt data."));
+
+		//C#
+		/*client.write(cardUID, 4);
+		Serial.println(F("Sendt data."));
 
 		//delay
 		//delay(1000);
@@ -167,7 +172,7 @@ void setup()
 		String recive = client.readString();
 		Serial.println(recive);
 
-		for (;;) {}
+		for (;;) {}*/
 	}
 	else
 	{
@@ -181,28 +186,37 @@ void setup()
 void loop()
 {
 
-	////wait for new card
-	//if (!rfid.PICC_IsNewCardPresent())
-	//	return;
+	//wait for new card
+	if (!rfid.PICC_IsNewCardPresent())
+		return;
 
-	////Verify if the NUID has been readed
-	//if (!rfid.PICC_ReadCardSerial())
-	//	return;
+	//Verify if the NUID has been readed
+	if (!rfid.PICC_ReadCardSerial())
+		return;
 
-	//// Halt PICC
-	//rfid.PICC_HaltA();
+	// Halt PICC
+	rfid.PICC_HaltA();
 
-	//// Stop encryption on PCD
-	//rfid.PCD_StopCrypto1();
+	// Stop encryption on PCD
+	rfid.PCD_StopCrypto1();
 
-	//printLCDAndSerial(wait);
-	//digitalWrite(LEDGREED, LOW);
-	//digitalWrite(LEDRED, HIGH);
-	//
-	////simulate network
+	printLCDAndSerial(wait);
+	digitalWrite(LEDGREED, LOW);
+	digitalWrite(LEDRED, HIGH);
+	
+	//simulate network
 	//delay(1000);
 
-	////temp
+	//real network
+	client.write(rfid.uid.uidByte, 4);
+	Serial.println(F("Sendt data."));
+
+	Serial.println(F("Got:"));
+	uint8_t rbuffer;
+	rbuffer = client.read();
+	Serial.println(rbuffer);
+
+	//temp
 	//if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
 	//{
 	//	printLCDAndSerial(ok);

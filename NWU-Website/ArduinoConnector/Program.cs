@@ -49,6 +49,7 @@ namespace ArduinoConnector
                 }
                 else
                 {
+                    Console.Write("Got: ");
                     for (int i = 0; i < amount; i++)
                     {
                         Console.Write(buffer[i]);
@@ -56,11 +57,18 @@ namespace ArduinoConnector
 
                     Console.WriteLine();
 
-                    Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, buffer.Length));
+                    if (buffer == new byte[] { 172, 12, 63, 213 })
+                    {
+                        buffer = new byte[] { 1 };
+                    }
+                    else
+                    {
+                        buffer = new byte[] { 0 };
+                    }
                     Console.WriteLine("Done");
                     Console.WriteLine("Will now talk back...");
+                    Console.WriteLine("Buffer: " + buffer[0]);
 
-                    buffer = Encoding.ASCII.GetBytes("Thanks.");
                     stream.Write(buffer, 0, buffer.Length);
 
                     Console.WriteLine("Sendt.");
