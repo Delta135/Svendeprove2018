@@ -39,6 +39,7 @@ namespace ArduinoConnector
                 client.ReceiveTimeout = 5000;
 
                 NetworkStream stream = client.GetStream();
+                stream.ReadTimeout = int.MaxValue;
 
                 int amount = stream.Read(buffer, 0, buffer.Length);
 
@@ -56,15 +57,21 @@ namespace ArduinoConnector
                     }
 
                     Console.WriteLine();
+                    byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
 
-                    if (buffer == new byte[] { 172, 12, 63, 213 })
+                    for (int i = 0; i < buffer.Length; i++)
                     {
+                        if (buffer[i] != fakeDB[i])
+                        {
+                            Console.WriteLine("Worng");
+                            buffer = new byte[] { 0 };
+                            break;
+                        }
+
+                        Console.WriteLine("Same");
                         buffer = new byte[] { 1 };
                     }
-                    else
-                    {
-                        buffer = new byte[] { 0 };
-                    }
+                    
                     Console.WriteLine("Done");
                     Console.WriteLine("Will now talk back...");
                     Console.WriteLine("Buffer: " + buffer[0]);
