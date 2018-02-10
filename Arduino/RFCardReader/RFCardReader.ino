@@ -212,9 +212,10 @@ void loop()
 	Serial.println(F("Sendt data."));
 
 	Serial.println(F("Got:"));
-	uint8_t rbuffer;
-	rbuffer = client.read();
-	Serial.println(rbuffer);
+	uint8_t *rbuffer;
+	size_t buffersize = 1;
+	/*rbuffer =*/ client.readBytes(rbuffer, buffersize);
+	Serial.println(*rbuffer);
 
 	//temp
 	//if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
