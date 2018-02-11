@@ -10,124 +10,82 @@ namespace ArduinoConnector
 {
     class Program
     {
-        static TcpListener listener;
-        static TcpClient client;
-        static NetworkStream stream;
-
         //Arduino ip/port
         static IPAddress arduinoIp = IPAddress.Any;
         static int arduinoPort = 80;
 
-        static byte[] buffer;
+        static byte[] workingBuffer;
 
         static ConnectionManager cm;
+        static DatabaseManager dbMan;
 
         static void Main(string[] args)
         {
-            //listener = new TcpListener(arduinoIp, arduinoPort);
             cm = new ConnectionManager(arduinoIp, arduinoPort);
+            dbMan = new DatabaseManager();
 
+            //Main loop
             while (true)
             {
-                //buffer = new byte[512];
                 Console.WriteLine("Listening...");
-                //listener.Start();
-
-                //client = listener.AcceptTcpClient();
 
                 cm.StartListening();
 
-                //if (!client.Connected)
-                //{
-                //    Console.WriteLine("No conn!");
-                //    for (;;) { }
-                //}
-
                 Console.WriteLine("Conn get!");
 
-                //client.ReceiveBufferSize = buffer.Length;
-                //client.ReceiveTimeout = 5000;
+                workingBuffer = cm.ReadIncommingBuffer();
 
-                //stream = client.GetStream();
-                //stream.ReadTimeout = int.MaxValue;
-
-                //int amount = stream.Read(buffer, 0, buffer.Length);
-                buffer = cm.ReadIncommingBuffer();
-
-                if (cm.Amount == 0)
+                if (cm.AmountReceived == 0)
                 {
                     Console.WriteLine("Got nothing...");
+                    cm.CloseStream();
                 }
                 else
                 {
+                    #region DEBUG
                     Console.Write("Got: ");
-                    for (int i = 0; i < cm.Amount; i++)
+                    for (int i = 0; i < cm.AmountReceived; i++)
                     {
-                        Console.Write(buffer[i]);
+                        Console.Write(cm.Buffer[i]);
                     }
-
                     Console.WriteLine();
+                    #endregion
+
+                    //check agenst DB
                     byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-                    bool checkInd = false, same = false;
+                    byte testResault = dbMan.CheckCard(fakeDB, workingBuffer);
 
-                    for (int i = 0; i < fakeDB.Length; i++)
+                    #region DEBUG
+                    switch (testResault)
                     {
-                        if (buffer[i] != fakeDB[i])
-                        {
-                            same = false;
+                        case 1:
+                            Console.WriteLine("Check in");
                             break;
-                        }
-                        else
-                        {
-                            same = true;
-                        }
+                        case 2:
+                            Console.WriteLine("Check out");
+                            break;
+                        case 3:
+                            Console.WriteLine("Too many");
+                            break;
+                        case 0:
+                            Console.WriteLine("Worng card");
+                            break;
+                        default:
+                            break;
                     }
+                    #endregion
 
-                    if (same)
-                    {
-                        Console.WriteLine("Same");
-                        if (checkInd)
-                        {
-                            buffer = new byte[] { 2 }; //checkud
-                        }
-                        else
-                        {
-                            buffer = new byte[] { 1 };
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Worng");
-                        buffer = new byte[] { 0 };
-                    }
+                    workingBuffer = new byte[] { testResault };
 
-                    //for (int i = 0; i < buffer.Length; i++)
-                    //{
-                    //    if (buffer[i] != fakeDB[i])
-                    //    {
-                    //        Console.WriteLine("Worng");
-                    //        buffer = new byte[] { 0 };
-                    //        break;
-                    //    }
-
-                    //    Console.WriteLine("Same");
-                    //    buffer = new byte[] { 1 };
-                    //}
-                    
                     Console.WriteLine("Done");
                     Console.WriteLine("Will now talk back...");
-                    Console.WriteLine("Buffer: " + buffer[0]);
+                    Console.WriteLine("Send result: " + workingBuffer[0]);
 
-                    cm.SendBuffer(buffer, 0, buffer.Length);
+                    cm.SendBuffer(workingBuffer, 0, workingBuffer.Length);
+                    cm.CloseStream();
 
                     Console.WriteLine("Sendt.");
-
-                    //for (;;) { }
                 }
-
-                //stream.Close();
-
-
             }
         }
     }

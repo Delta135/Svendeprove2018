@@ -19,18 +19,31 @@ namespace ArduinoConnector
         private NetworkStream connectionStream;
         private byte[] buffer;
 
-        private int amount;
+        private int amountReceived;
 
-        public int Amount
+        public int AmountReceived
         {
             get
             {
-                return amount;
+                return amountReceived;
             }
 
             set
             {
-                amount = value;
+                amountReceived = value;
+            }
+        }
+
+        public byte[] Buffer
+        {
+            get
+            {
+                return buffer;
+            }
+
+            set
+            {
+                buffer = value;
             }
         }
 
@@ -38,42 +51,52 @@ namespace ArduinoConnector
         {
             this.clientIP = clientIP;
             this.clientPort = clientPort;
-            buffer = new byte[512];
+            Buffer = new byte[10];
 
             listener = new TcpListener(clientIP, clientPort);
         }
 
-        public bool StartListening()
+        public void StartListening()
         {
             //keep listening until we get a connection
             listener.Start();
             client = listener.AcceptTcpClient();
-            return true;
         }
 
         public byte[] ReadIncommingBuffer()
         {
-            client.ReceiveBufferSize = buffer.Length;
+            client.ReceiveBufferSize = Buffer.Length;
             client.ReceiveTimeout = int.MaxValue;
 
             connectionStream = client.GetStream();
             connectionStream.ReadTimeout = int.MaxValue;
-            Amount = connectionStream.Read(buffer, 0, buffer.Length);
+            AmountReceived = connectionStream.Read(Buffer, 0, Buffer.Length);
 
-            return buffer;
+            #region debug
+            Console.WriteLine();
+            Console.WriteLine("FROM CM:");
+            Console.WriteLine("Buffer length: " + Buffer.Length);
+            Console.WriteLine("Buffer contants: ");
+            for (int i = 0; i < Buffer.Length; i++)
+            {
+                Console.Write(Buffer[i]);
+            }
+            Console.WriteLine("END CM:");
+            Console.WriteLine();
+            #endregion
+
+            return Buffer;
         }
 
         public void SendBuffer(byte[] buffer, int offset, int bufferLength)
         {
             connectionStream.Write(buffer, offset, bufferLength);
-            connectionStream.Close();
+            CloseStream();
         }
 
-        public void next()
+        public void CloseStream()
         {
-            
-
-            
+            connectionStream.Close();
         }
     }
 }
