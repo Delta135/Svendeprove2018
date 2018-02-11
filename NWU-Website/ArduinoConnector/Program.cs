@@ -10,6 +10,8 @@ namespace ArduinoConnector
 {
     class Program
     {
+        static int areaId = 1;
+
         //Arduino ip/port
         static IPAddress arduinoIp = IPAddress.Any;
         static int arduinoPort = 80;
@@ -18,11 +20,15 @@ namespace ArduinoConnector
 
         static ConnectionManager cm;
         static DatabaseManager dbMan;
+        static DatabaseResult dbr;
 
         static void Main(string[] args)
         {
             cm = new ConnectionManager(arduinoIp, arduinoPort);
-            dbMan = new DatabaseManager();
+            dbMan = new DatabaseManager(areaId);
+
+            byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
+            dbMan.CheckCard(fakeDB);
 
             //Main loop
             while (true)
@@ -52,8 +58,10 @@ namespace ArduinoConnector
                     #endregion
 
                     //check agenst DB
-                    byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-                    byte testResault = dbMan.CheckCard(fakeDB, workingBuffer);
+                    //byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
+                    //byte testResault = dbMan.CheckCard(fakeDB, workingBuffer);
+
+                    byte testResault = dbMan.CheckCard(workingBuffer);
 
                     #region DEBUG
                     switch (testResault)

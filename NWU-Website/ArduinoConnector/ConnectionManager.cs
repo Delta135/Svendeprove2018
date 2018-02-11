@@ -51,7 +51,7 @@ namespace ArduinoConnector
         {
             this.clientIP = clientIP;
             this.clientPort = clientPort;
-            Buffer = new byte[10];
+            Buffer = new byte[4];
 
             listener = new TcpListener(clientIP, clientPort);
         }
@@ -81,6 +81,7 @@ namespace ArduinoConnector
             {
                 Console.Write(Buffer[i]);
             }
+            Console.WriteLine();
             Console.WriteLine("END CM:");
             Console.WriteLine();
             #endregion
