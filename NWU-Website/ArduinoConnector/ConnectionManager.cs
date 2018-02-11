@@ -63,6 +63,7 @@ namespace ArduinoConnector
             client = listener.AcceptTcpClient();
         }
 
+        //read data from the ardunio
         public byte[] ReadIncommingBuffer()
         {
             client.ReceiveBufferSize = Buffer.Length;
@@ -89,6 +90,7 @@ namespace ArduinoConnector
             return Buffer;
         }
 
+        //send data to the arduino
         public void SendBuffer(byte[] buffer, int offset, int bufferLength)
         {
             connectionStream.Write(buffer, offset, bufferLength);

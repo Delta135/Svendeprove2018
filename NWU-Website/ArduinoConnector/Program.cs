@@ -20,25 +20,23 @@ namespace ArduinoConnector
 
         static ConnectionManager cm;
         static DatabaseManager dbMan;
-        static DatabaseResult dbr;
 
         static void Main(string[] args)
         {
             cm = new ConnectionManager(arduinoIp, arduinoPort);
             dbMan = new DatabaseManager(areaId);
 
-            //byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-            //dbMan.CheckCard(fakeDB);
-
             //Main loop
             while (true)
             {
                 Console.WriteLine("Listening...");
 
+                //start listening for arduinos
                 cm.StartListening();
 
                 Console.WriteLine("Conn get!");
 
+                //read what the arduino is sending
                 workingBuffer = cm.ReadIncommingBuffer();
 
                 if (cm.AmountReceived == 0)
@@ -57,13 +55,11 @@ namespace ArduinoConnector
                     Console.WriteLine();
                     #endregion
 
-                    //check agenst DB
-                    //byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-                    //byte testResault = dbMan.CheckCard(fakeDB, workingBuffer);
-
+                    //check agenst DB and return a value we can send to the arduino
                     byte testResault = dbMan.CheckCard(workingBuffer);
 
                     #region DEBUG
+                    //debug
                     switch (testResault)
                     {
                         case 1:
@@ -89,6 +85,7 @@ namespace ArduinoConnector
                     Console.WriteLine("Will now talk back...");
                     Console.WriteLine("Send result: " + workingBuffer[0]);
 
+                    //send the resault to the arduino
                     cm.SendBuffer(workingBuffer, 0, workingBuffer.Length);
                     cm.CloseStream();
 

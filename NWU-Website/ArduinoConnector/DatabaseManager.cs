@@ -11,8 +11,7 @@ namespace ArduinoConnector
     {
         private string sqlConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Test;Integrated Security=True;User Id=mthy;Password=Kode2288;";
         private string sqlQurry;
-        private string sqlFormattedDate;
-        private int areaId;
+        private int areaId;//the id of the area the card reader is at
         private int cardID;
 
         private SqlConnection sqlConn;
@@ -54,6 +53,7 @@ namespace ArduinoConnector
             return 1;
         }
 
+        //retive carddata from the database
         private DatabaseResult getCardData()
         {
             using (sqlConn = new SqlConnection(sqlConnectionString))
@@ -78,6 +78,7 @@ namespace ArduinoConnector
             return buildDatabaseResault(0,0,0,false);
         }
 
+        //convert the array into a whole number
         //Not the best way, but it's the only consistent one i can find
         private int arrayToInt(byte[] input)
         {
@@ -89,6 +90,8 @@ namespace ArduinoConnector
             return int.Parse(temp);
         }
 
+
+        //builds the databaseresult
         private DatabaseResult buildDatabaseResault(int cardUID, int currentNumber, int maxNumber, bool checkInStatus)
         {
             return dbr = new DatabaseResult(cardUID, currentNumber, maxNumber, checkInStatus);
@@ -101,6 +104,7 @@ namespace ArduinoConnector
         //        sqlConn.Open();
         //        Console.WriteLine(sqlConn.Database);
         //        DateTime myDateTime = DateTime.Now;
+        //        private string sqlFormattedDate;
         //        sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
         //        Console.WriteLine(sqlFormattedDate);
         //        sqlQurry = "USE Test; INSERT INTO cardTest(kortUID, kortCheckedInd, omraadeAntal, omraadeMaxAntal, timetamp) VALUES(1721263213, 0, 10, 15, '" + sqlFormattedDate + "')";
