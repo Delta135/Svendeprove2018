@@ -73,7 +73,15 @@ namespace ArduinoConnector
 
             connectionStream = client.GetStream();
             connectionStream.ReadTimeout = int.MaxValue;
-            AmountReceived = connectionStream.Read(Buffer, 0, Buffer.Length);
+
+            try
+            {
+                AmountReceived = connectionStream.Read(Buffer, 0, Buffer.Length);
+            }
+            catch (Exception)
+            {
+                AmountReceived = 0;
+            }
 
             #region debug
             Console.WriteLine();

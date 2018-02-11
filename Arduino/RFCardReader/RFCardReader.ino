@@ -107,26 +107,140 @@ void setup()
 
 	//led
 	Serial.println(F("Setting Up LED..."));
+	initLED();
+
+	//LCD
+	//LCD columns and rows, small is 16 columns on ech row (2 in total)
+	Serial.println(F("Setting Up LCD..."));
+	initLCD();
+
+	//RFID
+	Serial.println(F("Setting Up RFID..."));
+	initRFID();
+
+	//Ethernet
+	Serial.println(F("Setting Up Ehternet"));
+	initEhternet();
+}
+
+void loop()
+{
+
+	//wait for new card
+	if (!rfid.PICC_IsNewCardPresent())
+		return;
+
+	//Verify if the NUID has been readed
+	if (!rfid.PICC_ReadCardSerial())
+		return;
+
+	// Halt PICC
+	rfid.PICC_HaltA();
+
+	// Stop encryption on PCD
+	rfid.PCD_StopCrypto1();
+
+	//a card was used display wait
+	printLCDAndSerial(wait);
+	digitalWrite(LEDGREED, LOW);
+	digitalWrite(LEDRED, HIGH);
+	
+	//simulate network
+	//delay(1000);
+
+	//real network
+	byte bufferWithID[5];
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		bufferWithID[i] = rfid.uid.uidByte[i];
+	}
+	bufferWithID[4] = MYID;
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		Serial.print(bufferWithID[i]), Serial.print(",");
+	}
+
+	client.write(bufferWithID, 5);
+	Serial.println(F("Sendt data."));
+
+	Serial.println(F("Got:"));
+	uint8_t *rbuffer;
+	size_t buffersize = 1;
+	/*rbuffer =*/ client.readBytes(rbuffer, buffersize);
+	Serial.println(*rbuffer);
+
+	switch (*rbuffer)
+	{
+	case 0:
+		printLCDAndSerial(denied);
+		digitalWrite(LEDGREED, LOW);
+		digitalWrite(LEDRED, LOW);
+		break;
+	case 1:
+		printLCDAndSerial(ok);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+		break;
+	case 2:
+		printLCDAndSerial(ok);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+		break;
+	case 3:
+		printLCDAndSerial(tooManyRow1);
+		lcd.setCursor(0, 2);
+		lcd.print(tooManyRow2);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+		break;
+	default:
+		printLCDAndSerial(error);
+		digitalWrite(LEDGREED, LOW);
+		digitalWrite(LEDRED, LOW);
+		break;
+	}
+
+	//show the message for 2 sec
+	delay(2000);
+
+	printLCDAndSerial(readCard);
+	digitalWrite(LEDGREED, HIGH);
+	digitalWrite(LEDRED, LOW);
+}
+
+//for debug
+void printLCDAndSerial(const String &msg)
+{
+	lcd.clear();
+	lcd.print(msg);
+	Serial.println(msg);
+}
+
+void initLED()
+{
 	pinMode(LEDGREED, OUTPUT);
 	pinMode(LEDRED, OUTPUT);
 
 	digitalWrite(LEDGREED, HIGH);
 	digitalWrite(LEDRED, LOW);
+}
 
-	//LCD
-	//LCD columns and rows, small is 16 columns on ech row (2 in total)
-	Serial.println(F("Setting Up LCD..."));
+void initLCD()
+{
 	lcd.begin(LCDCOLUMNS, LCDROWS);
 	lcd.print(readCard);
+}
 
-	//RFID
-	Serial.println(F("Setting Up RFID..."));
+void initRFID()
+{
 	SPI.begin();
 	rfid.PCD_Init();
+}
 
-	//Ethernet
-	Serial.println(F("Setting Up Ehternet"));
-
+void initEhternet()
+{
 	//Use to connect to server
 	//if (Ethernet.begin(MAC) == 1)
 	//{
@@ -142,7 +256,7 @@ void setup()
 
 	Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
 
-	//a delay here seems to give more stabilaty when connecting
+									//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
 	//if (client.connect(ServerIP, 80))
@@ -186,114 +300,14 @@ void setup()
 	}
 }
 
-void loop()
-{
-
-	//wait for new card
-	if (!rfid.PICC_IsNewCardPresent())
-		return;
-
-	//Verify if the NUID has been readed
-	if (!rfid.PICC_ReadCardSerial())
-		return;
-
-	// Halt PICC
-	rfid.PICC_HaltA();
-
-	// Stop encryption on PCD
-	rfid.PCD_StopCrypto1();
-
-	printLCDAndSerial(wait);
-	digitalWrite(LEDGREED, LOW);
-	digitalWrite(LEDRED, HIGH);
-	
-	//simulate network
-	//delay(1000);
-
-	//real network
-	byte bufferWithID[5];
-
-	for (size_t i = 0; i < 4; i++)
-	{
-		bufferWithID[i] = rfid.uid.uidByte[i];
-	}
-	bufferWithID[4] = MYID;
-
-	for (size_t i = 0; i < 5; i++)
-	{
-		Serial.print(bufferWithID[i]), Serial.print(",");
-	}
-
-	client.write(bufferWithID, 5);
-	Serial.println(F("Sendt data."));
-
-	Serial.println(F("Got:"));
-	uint8_t *rbuffer;
-	size_t buffersize = 1;
-	/*rbuffer =*/ client.readBytes(rbuffer, buffersize);
-	Serial.println(*rbuffer);
-
-	//temp
-	if (*rbuffer == 1)
-	{
-		printLCDAndSerial(ok);
-		digitalWrite(LEDGREED, HIGH);
-		digitalWrite(LEDRED, LOW);
-	}
-	if (*rbuffer == 2)
-	{
-		printLCDAndSerial(denied);
-		digitalWrite(LEDGREED, HIGH);
-		digitalWrite(LEDRED, LOW);
-	}
-	else
-	{
-		printLCDAndSerial(error);
-		digitalWrite(LEDGREED, LOW);
-		digitalWrite(LEDRED, LOW);
-	}
-
-	delay(1000);
-
-	printLCDAndSerial(readCard);
-	digitalWrite(LEDGREED, HIGH);
-	digitalWrite(LEDRED, LOW);
-}
-
-//for debug
-void printLCDAndSerial(const String &msg)
-{
-	lcd.clear();
-	lcd.print(msg);
-	Serial.println(msg);
-}
-
 //TODO
-void initLED()
+void LCDPrintNew(const String &msg)
 {
 
 }
 
-//TODO
-void initLCD()
-{
-
-}
-
-//TODO
-void initREID()
-{
-
-}
-
-//TODO
-void initEhternet()
-{
-
-}
-
-//TODO
-void LCDPrint(const String &msg)
+//print a messege on the first row and the 2ed row
+void LCDPrintNew(const String &msg, const String &msg2)
 {
 
 }

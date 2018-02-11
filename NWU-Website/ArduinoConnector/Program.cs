@@ -39,6 +39,7 @@ namespace ArduinoConnector
 
                 if (cm.AmountReceived == 0)
                 {
+                    //we got nothing return to listion state
                     Console.WriteLine("Got nothing...");
                     cm.CloseStream();
                 }
