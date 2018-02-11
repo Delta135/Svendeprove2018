@@ -27,8 +27,8 @@ namespace ArduinoConnector
             cm = new ConnectionManager(arduinoIp, arduinoPort);
             dbMan = new DatabaseManager(areaId);
 
-            byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-            dbMan.CheckCard(fakeDB);
+            //byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
+            //dbMan.CheckCard(fakeDB);
 
             //Main loop
             while (true)

@@ -80,25 +80,14 @@ namespace ArduinoConnector
             }
         }
 
-        public DatabaseResult(int uid, int currentNumber, int maxNumber, int checkInStatus)
+        public DatabaseResult(int uid, int currentNumber, int maxNumber, bool checkInStatus)
         {
             CardUID = uid;
             CurrentAreaNumber = currentNumber;
             MaxAreaNumber = maxNumber;
 
-            CardIsCheckedIn = getCehckInStatus(checkInStatus);
+            CardIsCheckedIn = checkInStatus;
             TooManyInArea = calculateAreaNumber(currentNumber, maxNumber);
-        }
-
-        private bool getCehckInStatus(int dbBool)
-        {
-            //zero eqels not checked in
-            if (dbBool != 0)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private bool calculateAreaNumber(int current, int max)
