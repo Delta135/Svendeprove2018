@@ -10,22 +10,27 @@ namespace ArduinoConnector
 {
     class Program
     {
+        static TcpListener listener;
+        static TcpClient client;
+        static NetworkStream stream;
+
+        //Arduino ip/port
+        static IPAddress arduinoIp = IPAddress.Any;
+        static int arduinoPort = 80;
+
+        static byte[] buffer;
+
         static void Main(string[] args)
         {
-            //Arduino ip/port
-            IPAddress arduinoIp = IPAddress.Any;
-            int arduinoPort = 80;
-
-            TcpListener listener = new TcpListener(arduinoIp, arduinoPort);
-
-            byte[] buffer = new byte[512]; 
+            listener = new TcpListener(arduinoIp, arduinoPort); 
 
             while (true)
             {
+                buffer = new byte[512];
                 Console.WriteLine("Listening...");
                 listener.Start();
 
-                TcpClient client = listener.AcceptTcpClient();
+                client = listener.AcceptTcpClient();
 
                 if (!client.Connected)
                 {
@@ -38,7 +43,7 @@ namespace ArduinoConnector
                 client.ReceiveBufferSize = buffer.Length;
                 client.ReceiveTimeout = 5000;
 
-                NetworkStream stream = client.GetStream();
+                stream = client.GetStream();
                 stream.ReadTimeout = int.MaxValue;
 
                 int amount = stream.Read(buffer, 0, buffer.Length);
@@ -58,7 +63,7 @@ namespace ArduinoConnector
 
                     Console.WriteLine();
                     byte[] fakeDB = new byte[] { 172, 12, 63, 213 };
-                    bool checkInd = true, same = false;
+                    bool checkInd = false, same = false;
 
                     for (int i = 0; i < fakeDB.Length; i++)
                     {
@@ -112,8 +117,10 @@ namespace ArduinoConnector
 
                     Console.WriteLine("Sendt.");
 
-                    for (;;) { }
+                    //for (;;) { }
                 }
+
+                stream.Close();
 
 
             }
