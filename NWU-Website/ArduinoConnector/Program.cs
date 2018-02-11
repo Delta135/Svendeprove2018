@@ -20,43 +20,48 @@ namespace ArduinoConnector
 
         static byte[] buffer;
 
+        static ConnectionManager cm;
+
         static void Main(string[] args)
         {
-            listener = new TcpListener(arduinoIp, arduinoPort); 
+            //listener = new TcpListener(arduinoIp, arduinoPort);
+            cm = new ConnectionManager(arduinoIp, arduinoPort);
 
             while (true)
             {
-                buffer = new byte[512];
+                //buffer = new byte[512];
                 Console.WriteLine("Listening...");
-                listener.Start();
+                //listener.Start();
 
-                client = listener.AcceptTcpClient();
+                //client = listener.AcceptTcpClient();
 
-                if (!client.Connected)
-                {
-                    Console.WriteLine("No conn!");
-                    for (;;) { }
-                }
+                cm.StartListening();
+
+                //if (!client.Connected)
+                //{
+                //    Console.WriteLine("No conn!");
+                //    for (;;) { }
+                //}
 
                 Console.WriteLine("Conn get!");
 
-                client.ReceiveBufferSize = buffer.Length;
-                client.ReceiveTimeout = 5000;
+                //client.ReceiveBufferSize = buffer.Length;
+                //client.ReceiveTimeout = 5000;
 
-                stream = client.GetStream();
-                stream.ReadTimeout = int.MaxValue;
+                //stream = client.GetStream();
+                //stream.ReadTimeout = int.MaxValue;
 
-                int amount = stream.Read(buffer, 0, buffer.Length);
+                //int amount = stream.Read(buffer, 0, buffer.Length);
+                buffer = cm.ReadIncommingBuffer();
 
-                if (amount == 0)
+                if (cm.Amount == 0)
                 {
                     Console.WriteLine("Got nothing...");
-                    for (;;) { }
                 }
                 else
                 {
                     Console.Write("Got: ");
-                    for (int i = 0; i < amount; i++)
+                    for (int i = 0; i < cm.Amount; i++)
                     {
                         Console.Write(buffer[i]);
                     }
@@ -113,14 +118,14 @@ namespace ArduinoConnector
                     Console.WriteLine("Will now talk back...");
                     Console.WriteLine("Buffer: " + buffer[0]);
 
-                    stream.Write(buffer, 0, buffer.Length);
+                    cm.SendBuffer(buffer, 0, buffer.Length);
 
                     Console.WriteLine("Sendt.");
 
                     //for (;;) { }
                 }
 
-                stream.Close();
+                //stream.Close();
 
 
             }
