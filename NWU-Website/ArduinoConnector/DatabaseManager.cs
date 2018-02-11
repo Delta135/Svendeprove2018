@@ -18,16 +18,15 @@ namespace ArduinoConnector
         private SqlCommand sqlcmd;
         private DatabaseResult dbr;
 
-        public DatabaseManager(int areaId)
+        public DatabaseManager()
         {
-            this.areaId = areaId;    
+               
         }
 
         public byte CheckCard(byte[] RecivedUID)
         {
+            cardID = arrayToInt(getAreaId(RecivedUID));
             dbr = getCardData();
-
-            cardID = arrayToInt(RecivedUID);
 
             //Console.WriteLine("DB CARDID: " + dbr.CardUID + " Input: " + cardID);
 
@@ -90,11 +89,24 @@ namespace ArduinoConnector
             return int.Parse(temp);
         }
 
-
         //builds the databaseresult
         private DatabaseResult buildDatabaseResault(int cardUID, int currentNumber, int maxNumber, bool checkInStatus)
         {
             return dbr = new DatabaseResult(cardUID, currentNumber, maxNumber, checkInStatus);
+        }
+
+        private byte[] getAreaId(byte[] inputBuffer)
+        {
+            //ararys are zero bound, but the length is not
+            areaId = inputBuffer[inputBuffer.Length -1];
+
+            byte[] bufferWithNoId = new byte[inputBuffer.Length -1];
+            for (int i = 0; i < inputBuffer.Length - 1; i++)
+            {
+                bufferWithNoId[i] = inputBuffer[i];
+            }
+
+            return bufferWithNoId;
         }
 
         //public void InsertIntoDB(string sqlQurry)

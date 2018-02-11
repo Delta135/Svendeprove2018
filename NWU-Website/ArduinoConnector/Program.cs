@@ -10,8 +10,6 @@ namespace ArduinoConnector
 {
     class Program
     {
-        static int areaId = 1;
-
         //Arduino ip/port
         static IPAddress arduinoIp = IPAddress.Any;
         static int arduinoPort = 80;
@@ -24,7 +22,7 @@ namespace ArduinoConnector
         static void Main(string[] args)
         {
             cm = new ConnectionManager(arduinoIp, arduinoPort);
-            dbMan = new DatabaseManager(areaId);
+            dbMan = new DatabaseManager();
 
             //Main loop
             while (true)

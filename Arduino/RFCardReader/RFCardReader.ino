@@ -10,6 +10,9 @@
 #include <SPI.h>
 
 #pragma region Defines
+/*Genral*/
+#define MYID 1
+
 /*LCD vars*/
 //RS digital 9
 #define LCDRS 9
@@ -208,7 +211,20 @@ void loop()
 	//delay(1000);
 
 	//real network
-	client.write(rfid.uid.uidByte, 4);
+	byte bufferWithID[5];
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		bufferWithID[i] = rfid.uid.uidByte[i];
+	}
+	bufferWithID[4] = MYID;
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		Serial.print(bufferWithID[i]), Serial.print(",");
+	}
+
+	client.write(bufferWithID, 5);
 	Serial.println(F("Sendt data."));
 
 	Serial.println(F("Got:"));

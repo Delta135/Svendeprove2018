@@ -21,6 +21,8 @@ namespace ArduinoConnector
 
         private int amountReceived;
 
+        private int bufferSize = 5;
+
         public int AmountReceived
         {
             get
@@ -51,7 +53,7 @@ namespace ArduinoConnector
         {
             this.clientIP = clientIP;
             this.clientPort = clientPort;
-            Buffer = new byte[4];
+            Buffer = new byte[bufferSize];
 
             listener = new TcpListener(clientIP, clientPort);
         }
