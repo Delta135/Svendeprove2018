@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ArduinoConnector
 {
-    class DatabaseManager
+    public class DatabaseManager
     {
         //private string sqlConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Test;Integrated Security=True;User Id=mthy;Password=Kode2288;";
         private string sqlConnectionString = @"Data Source=SVNWU2\SQLEXPRESS;Initial Catalog=nwuDB;User ID=syi;Password=Kfedb1040;MultipleActiveResultSets=True;Application Name=EntityFramework";

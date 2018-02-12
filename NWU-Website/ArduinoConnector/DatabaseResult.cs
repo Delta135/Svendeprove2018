@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArduinoConnector
 {
-    class DatabaseResult
+    public class DatabaseResult
     {
         private bool cardIsCheckedIn;
         private bool tooManyInArea;

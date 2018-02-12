@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArduinoConnector
 {
-    class ConnectionManager
+    public class ConnectionManager
     {
         //what to connect to
         private IPAddress clientIP;
