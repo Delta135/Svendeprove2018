@@ -11,7 +11,8 @@
 
 #pragma region Defines
 /*Genral*/
-#define MYID 1
+#define MYID 1 //the card readers area id
+#define SERVERPORT 1000
 
 /*LCD vars*/
 //RS digital 9
@@ -96,7 +97,7 @@ IPAddress ServerIP = {172, 16, 1, 4};
 EthernetClient client;
 
 //Test
-const byte cardUID[4] = {172, 12, 63, 213};
+//const byte cardUID[4] = {172, 12, 63, 213};
 const byte UIDlength = 4;
 IPAddress PCIP = { 172, 16, 1, 1 };
 
@@ -242,40 +243,30 @@ void initRFID()
 void initEhternet()
 {
 	//Use to connect to server
-	//if (Ethernet.begin(MAC) == 1)
-	//{
-	//	Serial.println(F("Ehternet config done."));
-	//}
-	//else
-	//{
-	//	Serial.println(F("Ehternet config failed."));
+	if (Ethernet.begin(MAC) == 1)
+	{
+		Serial.println(F("Ehternet config done."));
+	}
+	else
+	{
+		Serial.println(F("Ehternet config failed."));
 
-	//	//do nothing forever
-	//	for (;;) {}
-	//}
+		//do nothing forever
+		for (;;) {}
+	}
 
-	Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
+	//Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
 
-									//a delay here seems to give more stabilaty when connecting
+	//a delay here seems to give more stabilaty when connecting
 	delay(1000);
 
-	//if (client.connect(ServerIP, 80))
-	if (client.connect(PCIP, 80))
+	if (client.connect(ServerIP, SERVERPORT))
+	//if (client.connect(PCIP, SERVERPORT))
 	{
 		Serial.println(F("Connected!"));
 
 		Serial.println(F("IP:"));
 		Serial.println(Ethernet.localIP());
-
-		//send data
-		//PHP
-		//client.print(F("GET /InsertData.php?data="));
-		//client.write(cardUID, 4);
-		//client.println(F(" HTTP/1.1"));
-		//client.print(F("HOST: "));
-		//client.println(ServerIP);
-
-		//Serial.println(F("Sendt data."));
 
 		//C#
 		/*client.write(cardUID, 4);

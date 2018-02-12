@@ -12,7 +12,7 @@ namespace ArduinoConnector
     {
         //Arduino ip/port
         static IPAddress arduinoIp = IPAddress.Any;
-        static int arduinoPort = 80;
+        static int arduinoPort = 1000;
 
         static byte[] workingBuffer;
 
