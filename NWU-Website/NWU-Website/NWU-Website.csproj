@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VagtCentralController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +151,7 @@
     <Compile Include="Models\personale.cs">
       <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VagtCentralChartsValues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +258,8 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\VagtCentral\Index.cshtml" />
+    <Content Include="Views\VagtCentral\RunningDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
