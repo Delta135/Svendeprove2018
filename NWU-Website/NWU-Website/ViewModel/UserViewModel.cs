@@ -8,7 +8,7 @@ namespace NWU_Website.ViewModel
 {
     public class UserViewModel
     {
-        public personale personale
+        public Personale personale
         {
             get; set;
         }

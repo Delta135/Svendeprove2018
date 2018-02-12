@@ -16,11 +16,11 @@ namespace NWU_Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorize(NWU_Website.Models.personale userModel)
+        public ActionResult Authorize(NWU_Website.Models.Personale userModel)
         {
-            using(nwuDBEntities db = new nwuDBEntities())
+            using(nwuDB1Entities1 db = new nwuDB1Entities1())
             {
-                var userDetails = db.personales.Where(x => x.brugernavn == userModel.brugernavn && x.password == userModel.password).FirstOrDefault();
+                var userDetails = db.Personales.Where(x => x.brugernavn == userModel.brugernavn && x.adgangskode == userModel.adgangskode).FirstOrDefault();
                 if(userDetails == null)
                 {
                     userModel.LoginErrorMessage = "Forkert brugernavn eller adgangskode.";

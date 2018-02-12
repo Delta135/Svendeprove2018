@@ -1,0 +1,73 @@
+﻿@model NWU_Website.Models.Personale
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Slet bruger</title>
+</head>
+<body>
+    <h3>Er du sikker på at du vil slette brugeren?</h3>
+    <div>
+        <h4>Personale</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.fornavn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fornavn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.efternavn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.efternavn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.brugernavn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.brugernavn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.adgangskode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.adgangskode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rolleID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rolleID)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

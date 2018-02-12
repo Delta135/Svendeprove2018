@@ -13,10 +13,10 @@ namespace NWU_Website.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class nwuDBEntities : DbContext
+    public partial class nwuDB1Entities1 : DbContext
     {
-        public nwuDBEntities()
-            : base("name=nwuDBEntities")
+        public nwuDB1Entities1()
+            : base("name=nwuDB1Entities1")
         {
         }
     
@@ -25,6 +25,6 @@ namespace NWU_Website.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<personale> personales { get; set; }
+        public virtual DbSet<Personale> Personales { get; set; }
     }
 }
