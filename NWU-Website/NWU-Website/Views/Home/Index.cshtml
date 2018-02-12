@@ -1,23 +1,33 @@
 ﻿
 @{
-    Layout = null;
-    if(Session["personaleID"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>    .dd{
+        background-color: white;
+        width: 600px;
+        border: 25px solid lightskyblue;
+        padding: 25px;
+        margin: 25px;
+         padding-left: 1.8em;
+    }
 
-<!DOCTYPE html>
+     table.space {
+         border-collapse: separate;
+         border-spacing: 10px;
+         *border-collapse: expression('separate', cellSpacing = '10px');
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-        <h1>Nordic Water Universe Personaleside</h1>
-        <a href="@Url.Action("LogOut","Login")">Log Ud</a>
-    </div>
-</body>
-</html>
+     }
+
+</style>
+<h2>Test Layout</h2>
+
+<div class="dd">
+    <table class="space">
+        <tr>
+            <td>Rolle 1 = Livredder  </td>
+            <td> Rolle 2 = Vagt  </td>
+            <td> Rolle 3 = Vagtcentral</td>
+        </tr>
+    </table>
+</div>
