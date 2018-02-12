@@ -9,7 +9,8 @@ namespace ArduinoConnector
 {
     class DatabaseManager
     {
-        private string sqlConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Test;Integrated Security=True;User Id=mthy;Password=Kode2288;";
+        //private string sqlConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Test;Integrated Security=True;User Id=mthy;Password=Kode2288;";
+        private string sqlConnectionString = @"Data Source=SVNWU2\SQLEXPRESS;Initial Catalog=nwuDB;User ID=syi;Password=Kfedb1040;MultipleActiveResultSets=True;Application Name=EntityFramework";
         private string sqlQurry;
         private int areaId;//the id of the area the card reader is at
         private int cardID;
@@ -57,17 +58,23 @@ namespace ArduinoConnector
         {
             using (sqlConn = new SqlConnection(sqlConnectionString))
             {
-                sqlQurry = "SELECT kortUID, kortCheckedInd, omraadeAntal, omraadeMaxAntal FROM cardTest WHERE omraadeId = " + areaId + ";";
+                //sqlQurry = "SELECT kortUID, kortCheckedInd, omraadeAntal, omraadeMaxAntal FROM cardTest WHERE omraadeId = " + areaId + ";";
+                sqlQurry = "select checkIND.checkindID, checkIND.checkStatus, checkIND.antalPersoner, omraade.maxAntal, omraadreadgang.armbaandsID from checkIND inner join omraade on checkIND.checkindID = omraade.omraadeID inner join omraadreadgang on omraadreadgang.armbaandsID = omraade.omraadeID;";
                 sqlConn.Open();
                 sqlcmd = new SqlCommand(sqlQurry, sqlConn);
                 SqlDataReader reader = sqlcmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    int? uid = reader["kortUID"] == DBNull.Value ? null : (int?)reader["kortUID"];
-                    bool? checkInstat = reader["kortCheckedInd"] == DBNull.Value ? null : (bool?)reader["kortCheckedInd"];
-                    int? currentArea = reader["omraadeAntal"] == DBNull.Value ? null : (int?)reader["omraadeAntal"];
-                    int? maxArea = reader["omraadeMaxAntal"] == DBNull.Value ? null : (int?)reader["omraadeMaxAntal"];
+                    //int? uid = reader["kortUID"] == DBNull.Value ? null : (int?)reader["kortUID"];
+                    //bool? checkInstat = reader["kortCheckedInd"] == DBNull.Value ? null : (bool?)reader["kortCheckedInd"];
+                    //int? currentArea = reader["omraadeAntal"] == DBNull.Value ? null : (int?)reader["omraadeAntal"];
+                    //int? maxArea = reader["omraadeMaxAntal"] == DBNull.Value ? null : (int?)reader["omraadeMaxAntal"];
+
+                    int? uid = reader["armbaandsID"] == DBNull.Value ? null : (int?)reader["armbaandsID"];
+                    bool? checkInstat = reader["checkStatus"] == DBNull.Value ? null : (bool?)reader["checkStatus"];
+                    int? currentArea = reader["antalPersoner"] == DBNull.Value ? null : (int?)reader["antalPersoner"];
+                    int? maxArea = reader["maxAntal"] == DBNull.Value ? null : (int?)reader["maxAntal"];
 
                     return buildDatabaseResault((int)uid, (int)currentArea, (int)maxArea, (bool)checkInstat);
                     //return new DatabaseResult((int)uid, (int)currentArea, (int)maxArea, (bool)checkInstat);
