@@ -50,5 +50,20 @@ namespace UnitTestArduinoCOnnector
             Assert.AreEqual(dbr.MaxAreaNumber, max);
             Assert.IsFalse(dbr.CardIsCheckedIn);
         }
+
+        [TestMethod]
+        public void TestMethod_getAreaId()
+        {
+            DatabaseManager dbMan = new DatabaseManager();
+            PrivateObject testDbMan = new PrivateObject(dbMan);
+
+            //dummy data
+            byte[] dummyBuffer = new byte[] { 12, 245, 56, 61, 3 };
+
+            byte[] resault = (byte[])testDbMan.Invoke("getAreaId", dummyBuffer);
+
+            Assert.AreEqual(resault[0], 122455661);
+            Assert.AreEqual(resault[1], 3);
+        }
     }
 }
