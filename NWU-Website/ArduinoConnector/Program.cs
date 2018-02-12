@@ -11,13 +11,13 @@ namespace ArduinoConnector
     class Program
     {
         //Arduino ip/port
-        static IPAddress arduinoIp = IPAddress.Any;
-        static int arduinoPort = 8090;
+        private static IPAddress arduinoIp = IPAddress.Any;
+        private static int arduinoPort = 8090;
 
-        static byte[] workingBuffer;
+        private static byte[] workingBuffer;
 
-        static ConnectionManager cm;
-        static DatabaseManager dbMan;
+        private static ConnectionManager cm;
+        private static DatabaseManager dbMan;
 
         static void Main(string[] args)
         {
