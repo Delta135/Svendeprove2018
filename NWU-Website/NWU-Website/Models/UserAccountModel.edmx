@@ -4,8 +4,8 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nwuDBLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="personale">
+      <Schema Namespace="nwuDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Personale">
           <Key>
             <PropertyRef Name="personaleID" />
           </Key>
@@ -13,18 +13,18 @@
           <Property Name="fornavn" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="efternavn" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="brugernavn" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adgangskode" Type="varchar(max)" Nullable="false" />
           <Property Name="rolleID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="nwuDBLoginModelStoreContainer">
-          <EntitySet Name="personale" EntityType="Self.personale" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="nwuDB1ModelStoreContainer">
+          <EntitySet Name="Personale" EntityType="Self.Personale" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="nwuDBLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="personale">
+      <Schema Namespace="nwuDB1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Personale">
           <Key>
             <PropertyRef Name="personaleID" />
           </Key>
@@ -32,26 +32,26 @@
           <Property Name="fornavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="efternavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="brugernavn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adgangskode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rolleID" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="nwuDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="personales" EntityType="Self.personale" />
+        <EntityContainer Name="nwuDB1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Personales" EntityType="Self.Personale" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="nwuDBLoginModelStoreContainer" CdmEntityContainer="nwuDBEntities">
-          <EntitySetMapping Name="personales">
-            <EntityTypeMapping TypeName="nwuDBLoginModel.personale">
-              <MappingFragment StoreEntitySet="personale">
+        <EntityContainerMapping StorageEntityContainer="nwuDB1ModelStoreContainer" CdmEntityContainer="nwuDB1Entities1">
+          <EntitySetMapping Name="Personales">
+            <EntityTypeMapping TypeName="nwuDB1Model.Personale">
+              <MappingFragment StoreEntitySet="Personale">
                 <ScalarProperty Name="personaleID" ColumnName="personaleID" />
                 <ScalarProperty Name="fornavn" ColumnName="fornavn" />
                 <ScalarProperty Name="efternavn" ColumnName="efternavn" />
                 <ScalarProperty Name="brugernavn" ColumnName="brugernavn" />
-                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="adgangskode" ColumnName="adgangskode" />
                 <ScalarProperty Name="rolleID" ColumnName="rolleID" />
               </MappingFragment>
             </EntityTypeMapping>

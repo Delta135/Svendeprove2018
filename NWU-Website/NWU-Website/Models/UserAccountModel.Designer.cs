@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\syi\Documents\GitHub\Svendeprove2018\NWU-Website\NWU-Website\Models\LoginDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\mkt\Documents\GitHub\Svendeprove2018\NWU-Website\NWU-Website\Models\UserAccountModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

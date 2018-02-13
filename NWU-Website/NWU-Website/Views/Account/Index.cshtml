@@ -1,0 +1,68 @@
+﻿@model IEnumerable<NWU_Website.Models.Personale>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fornavn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.efternavn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.brugernavn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adgangskode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rolleID)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fornavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.efternavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brugernavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adgangskode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rolleID)
+                </td>
+                <td>
+                    @Html.ActionLink("Redigere", "Edit", new { id = item.personaleID }) |
+                    @Html.ActionLink("Slet", "Delete", new { id = item.personaleID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        @Html.ActionLink("Opret ny bruger", "Create")
+    </p>
+</body>
+</html>
