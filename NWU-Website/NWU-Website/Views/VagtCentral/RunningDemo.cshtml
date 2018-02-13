@@ -1,0 +1,295 @@
+﻿
+@*Running demo simulating a real running Vagtcentral site - Claus*@
+
+<html>
+ <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['gauge'], 'language': 'de' });
+
+        google.charts.setOnLoadCallback(draw1Chart);
+        google.charts.setOnLoadCallback(draw2Chart);
+        google.charts.setOnLoadCallback(draw3Chart);
+        google.charts.setOnLoadCallback(draw4Chart);
+        google.charts.setOnLoadCallback(draw5Chart);
+        google.charts.setOnLoadCallback(draw6Chart);
+        google.charts.setOnLoadCallback(draw7Chart);
+        google.charts.setOnLoadCallback(draw8Chart);
+
+        function draw1Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Splashbassin', 80]
+            ]);
+
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
+            chart.draw(data, options);
+
+            // kan måske bruges til at hente værdi fra DB hvert sekund
+            setInterval(function () {
+                data.setValue(0, 1, 140 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+
+        function draw2Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Bølgebassin', 55]
+            ]);
+
+            var options = {
+                max: 300,
+                redFrom: 270, redTo: 300,
+                yellowFrom: 225, yellowTo: 270,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
+
+            chart.draw(data, options);
+
+            setInterval(function () {
+                data.setValue(0, 1, 240 + Math.round(20 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw3Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Minigolf', 68]
+            ]);
+
+            var options = {
+                max: 160,
+                redFrom: 144, redTo: 160,
+                yellowFrom: 120, yellowTo: 144,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+            chart.draw(data, options);
+
+            setInterval(function () {
+                data.setValue(0, 1, 100 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw4Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Abeland', 68]
+            ]);
+
+            var options = {
+                max: 100,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div4'));
+
+            chart.draw(data, options);
+
+            setInterval(function () {
+                data.setValue(0, 1, 40 + Math.round(6 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw5Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Vandfald', 80]
+            ]);
+
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div5'));
+            chart.draw(data, options);
+
+            // kan måske bruges til at hente værdi fra DB hvert sekund
+            setInterval(function () {
+                data.setValue(0, 1, 140 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw6Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Soppebassin', 80]
+            ]);
+
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div6'));
+            chart.draw(data, options);
+
+            // kan måske bruges til at hente værdi fra DB hvert sekund
+            setInterval(function () {
+                data.setValue(0, 1, 140 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw7Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Fitness', 80]
+            ]);
+
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div7'));
+            chart.draw(data, options);
+
+            // kan måske bruges til at hente værdi fra DB hvert sekund
+            setInterval(function () {
+                data.setValue(0, 1, 140 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+        function draw8Chart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Cafe', 80]
+            ]);
+
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div8'));
+            chart.draw(data, options);
+
+            // kan måske bruges til at hente værdi fra DB hvert sekund
+            setInterval(function () {
+                data.setValue(0, 1, 140 + Math.round(10 * Math.random()));
+                chart.draw(data, options);
+            }, 1000);
+        }
+
+    </script>
+ </head>
+
+ <body style="background-color:midnightblue;">
+    @*Ved at pakke alt ind i <div></div> og bruge col-lg-tal
+        kan vi styre placering af de 8 Gauge-meter og alt tekst*@
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h1 style="color:white;font-family:verdana;">Nordic Water Universe</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h2 style="color:white;font-family:verdana;">Vagtcentral</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4" align="center">
+                <h4 style="color:white;font-family:verdana;">Livredder Områder</h4>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4" align="center">
+                <h4 style="color:white;font-family:verdana;">Vagt Områder</h4>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div1" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div2" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div3" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div4" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div5" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div6" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div7" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div8" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+        </div>
+    </div>
+
+ </body>
+</html>
+
