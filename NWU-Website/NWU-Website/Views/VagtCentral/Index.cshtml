@@ -1,0 +1,334 @@
+﻿@*Values from About method is put into @Model - Claus*@
+@model NWU_Website.Models.VagtCentralChartsValues
+@using NWU_Website.Controllers;
+
+<html>
+<head>
+
+    @*Get and load Google Charts loader - Claus*@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        //Get newest version of Google Charts and load Chart package
+        //language is set to dk - Claus
+        google.charts.load('current', { 'packages': ['gauge'], 'language': 'dk' });
+
+
+        //Set methodes to run when Google Charts loader is ready - Claus
+        google.charts.setOnLoadCallback(draw1Chart);
+        google.charts.setOnLoadCallback(draw2Chart);
+        google.charts.setOnLoadCallback(draw3Chart);
+        google.charts.setOnLoadCallback(draw4Chart);
+        google.charts.setOnLoadCallback(draw5Chart);
+        google.charts.setOnLoadCallback(draw6Chart);
+        google.charts.setOnLoadCallback(draw7Chart);
+        google.charts.setOnLoadCallback(draw8Chart);
+        google.charts.setOnLoadCallback(updatePage);
+
+        // Method refresh the page - Claus
+        function updatePage()
+        {
+            location.reload(false);
+        }
+
+        //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw1Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Splashbassin', @Model.Tal1]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div1 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal1);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+          //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw2Chart() {
+
+            // Model.Tal2 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Bølgebassin', @Model.Tal2]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 300,
+                redFrom: 270, redTo: 300,
+                yellowFrom: 225, yellowTo: 270,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div2 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal2);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw3Chart() {
+
+            // Model.Tal3 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Minigolf', @Model.Tal3]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 160,
+                redFrom: 144, redTo: 160,
+                yellowFrom: 120, yellowTo: 144,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal3);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw4Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Abeland', @Model.Tal4]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 300,
+                redFrom: 270, redTo: 300,
+                yellowFrom: 225, yellowTo: 270,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div4 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div4'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal4);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw5Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Vandfald', @Model.Tal5]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 100,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div5 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div5'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal5);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw6Chart() {
+
+            // Model.Tal6 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Soppebassin', @Model.Tal6]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 160,
+                redFrom: 144, redTo: 160,
+                yellowFrom: 120, yellowTo: 144,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div6 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div6'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal6);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw7Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Fitness', @Model.Tal7]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div7 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div7'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal7);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw8Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Cafe', @Model.Tal8]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 100,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div8 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div8'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, @Model.Tal8);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+
+    </script>
+</head>
+
+<body style="background-color:midnightblue;">
+
+    @*Ved at pakke alt ind i <div></div> og bruge col-lg-tal
+        kan vi styre placering af de 8 Gauge-meter og alt tekst - Claus*@
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h1 style="color:white;font-family:verdana;">Nordic Water Universe</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h2 style="color:white;font-family:verdana;">Vagtcentral</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4" align="center">
+                <h4 style="color:white;font-family:verdana;">Livredder Områder</h4>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4" align="center">
+                <h4 style="color:white;font-family:verdana;">Vagt Områder</h4>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div1" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div2" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div3" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div4" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div5" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div6" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+
+
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div7" style="width: 290px; height: 180px;"></div>
+            </div>
+            <div class="col-lg-2" style="background-color:midnightblue;">
+                <div id="chart_div8" style="width: 290px; height: 180px;"></div>
+            </div>
+
+            <div class="col-lg-1" style="background-color:midnightblue;"></div>
+        </div>
+    </div>
+</body>
+</html>
+
