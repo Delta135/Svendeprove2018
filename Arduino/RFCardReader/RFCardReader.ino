@@ -69,11 +69,7 @@
 #define EhternetSPI4 13
 #pragma endregion
 
-//Save in PROGMEM (Flash storge) as we don't need to change it after compile
-//https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
-
 //LCD strings
-//https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/
 const PROGMEM String readCard = "Swipe Armbaand";
 const PROGMEM String wait = "Vent...";
 const PROGMEM String ok = "OK!";

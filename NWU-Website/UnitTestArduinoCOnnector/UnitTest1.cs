@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ArduinoConnector;
+using System.Linq;
 
 namespace UnitTestArduinoCOnnector
 {
@@ -62,8 +63,10 @@ namespace UnitTestArduinoCOnnector
 
             byte[] resault = (byte[])testDbMan.Invoke("getAreaId", dummyBuffer);
 
-            Assert.AreEqual(resault[0], 122455661);
-            Assert.AreEqual(resault[1], 3);
+            //getAreaId removes the last byte
+            dummyBuffer = new byte[] { 12, 245, 56, 61 };
+            
+            Assert.IsTrue(Enumerable.SequenceEqual(resault, dummyBuffer));
         }
     }
 }
