@@ -35,10 +35,13 @@ namespace NWU_Website.Controllers
         {
             if (ModelState.IsValid)
             {
+                personale.adgangskode = AESCryptography.Encryption(personale.adgangskode);
                 db.Personales.Add(personale);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ModelState.Clear();
+            ViewBag.Message = "Successfully Registered MR. " + personale.fornavn + " " + personale.efternavn;
 
             return View(personale);
         }
@@ -67,6 +70,7 @@ namespace NWU_Website.Controllers
         {
             if (ModelState.IsValid)
             {
+                personale.adgangskode = AESCryptography.Encryption(personale.adgangskode);
                 db.Entry(personale).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -109,6 +113,45 @@ namespace NWU_Website.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Autherize(NWU_Website.Models.Personale userModel)
+        {
+            using (nwuDB1Entities1 db = new nwuDB1Entities1())
+            {
+                var userDetails = db.Personales.Where(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode).FirstOrDefault();
+                //var userDetails = db.Personales.Single(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
+                if (userDetails != null)
+                {
+                    Session["UserID"] = userDetails.personaleID.ToString();
+                    Session["UserName"] = userDetails.brugernavn.ToString();
+                    return RedirectToAction("Index", userModel);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Brugernavn eller adgangskode stemmer ikke.");
+                }
+                //    var userDetails = db.Personales.Where(x => x.brugernavn == userModel.brugernavn && x.adgangskode == userModel.adgangskode).FirstOrDefault();
+                //    if (userDetails == null)
+                //    {
+                //        userModel.LoginErrorMessage = "Forkert brugernavn eller adgangskode.";
+                //        return View("Index", userModel);
+                //    }
+                //    else
+                //    {
+                //        Session["personaleID"] = userDetails.personaleID;
+                //        return RedirectToAction("Index", "Home");
+                //    }
+                //}
+                return RedirectToAction("Index","Account");
+            }
+
+         
+
+        }
     }
 }

@@ -14,9 +14,7 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -36,31 +34,35 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fornavn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.efternavn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brugernavn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.adgangskode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rolleID)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.personaleID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.personaleID })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fornavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.efternavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brugernavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adgangskode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rolleID)
+                </td>
+                <td>
+                    @Html.ActionLink("Redigere", "Edit", new { id = item.personaleID }) |
+                    @Html.ActionLink("Slet", "Delete", new { id = item.personaleID })
+                </td>
+            </tr>
+        }
+
     </table>
+    <p>
+        @Html.ActionLink("Opret ny bruger", "Create")
+    </p>
 </body>
 </html>
