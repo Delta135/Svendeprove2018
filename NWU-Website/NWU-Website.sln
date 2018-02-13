@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWU-Website", "NWU-Website\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoConnector", "ArduinoConnector\ArduinoConnector.csproj", "{0DF81023-0B22-4A0C-9066-79AE5E435CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestArduinoCOnnector", "UnitTestArduinoCOnnector\UnitTestArduinoCOnnector.csproj", "{67066577-D3D7-4D71-8809-B746F0036B85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestArduinoConnector", "UnitTestArduinoCOnnector\UnitTestArduinoConnector.csproj", "{67066577-D3D7-4D71-8809-B746F0036B85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

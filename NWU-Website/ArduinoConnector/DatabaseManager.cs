@@ -58,7 +58,9 @@ namespace ArduinoConnector
         {
             using (sqlConn = new SqlConnection(sqlConnectionString))
             {
+                //test
                 //sqlQurry = "SELECT kortUID, kortCheckedInd, omraadeAntal, omraadeMaxAntal FROM cardTest WHERE omraadeId = " + areaId + ";";
+
                 sqlQurry = "select checkIND.checkindID, checkIND.checkStatus, checkIND.antalPersoner, omraade.maxAntal, omraadreadgang.armbaandsID from checkIND inner join omraade on checkIND.checkindID = omraade.omraadeID inner join omraadreadgang on omraadreadgang.armbaandsID = omraade.omraadeID;";
                 sqlConn.Open();
                 sqlcmd = new SqlCommand(sqlQurry, sqlConn);
@@ -66,6 +68,7 @@ namespace ArduinoConnector
 
                 while (reader.Read())
                 {
+                    //testing
                     //int? uid = reader["kortUID"] == DBNull.Value ? null : (int?)reader["kortUID"];
                     //bool? checkInstat = reader["kortCheckedInd"] == DBNull.Value ? null : (bool?)reader["kortCheckedInd"];
                     //int? currentArea = reader["omraadeAntal"] == DBNull.Value ? null : (int?)reader["omraadeAntal"];
@@ -76,12 +79,11 @@ namespace ArduinoConnector
                     int? currentArea = reader["antalPersoner"] == DBNull.Value ? null : (int?)reader["antalPersoner"];
                     int? maxArea = reader["maxAntal"] == DBNull.Value ? null : (int?)reader["maxAntal"];
 
-                    return buildDatabaseResault((int)uid, (int)currentArea, (int)maxArea, (bool)checkInstat);
-                    //return new DatabaseResult((int)uid, (int)currentArea, (int)maxArea, (bool)checkInstat);
+                    return Utilities.GetDatabaseResult((int)uid, (int)currentArea, (int)maxArea, (bool)checkInstat);
                 }
             }
 
-            return buildDatabaseResault(0,0,0,false);
+            return Utilities.GetDatabaseResult(0,0,0,false);
         }
 
         //convert the array into a whole number
@@ -94,12 +96,6 @@ namespace ArduinoConnector
                 temp += input[i].ToString();
             }
             return int.Parse(temp);
-        }
-
-        //builds the databaseresult
-        private DatabaseResult buildDatabaseResault(int cardUID, int currentNumber, int maxNumber, bool checkInStatus)
-        {
-            return dbr = new DatabaseResult(cardUID, currentNumber, maxNumber, checkInStatus);
         }
 
         private byte[] getAreaId(byte[] inputBuffer)

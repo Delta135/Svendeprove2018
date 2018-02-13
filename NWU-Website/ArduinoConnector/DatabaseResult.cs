@@ -87,18 +87,6 @@ namespace ArduinoConnector
             MaxAreaNumber = maxNumber;
 
             CardIsCheckedIn = checkInStatus;
-            TooManyInArea = calculateAreaNumber(currentNumber, maxNumber);
-        }
-
-        private bool calculateAreaNumber(int current, int max)
-        {
-            //is there room in the area?
-            if (current <= max && current != max)
-            {
-                return false;//yes
-            }
-
-            return true;//no
         }
     }
 }
