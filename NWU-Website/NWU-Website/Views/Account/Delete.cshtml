@@ -1,7 +1,7 @@
-﻿@model NWU_Website.Models.personale
+﻿@model NWU_Website.Models.Personale
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,13 +9,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Slet bruger</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Slet bruger</title>
 </head>
 <body>
-    <h3>Er du sikker på at du vil slette denne bruger?</h3>
+    <h3>Er du sikker på at du vil slette brugeren?</h3>
     <div>
-        <h4>personale</h4>
+        <h4>Personale</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -43,11 +43,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.password)
+                @Html.DisplayNameFor(model => model.adgangskode)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.password)
+                @Html.DisplayFor(model => model.adgangskode)
             </dd>
     
             <dt>
@@ -64,8 +64,8 @@
             @Html.AntiForgeryToken()
     
             <div class="form-actions no-color">
-                <input type="submit" value="Slet bruger" class="btn btn-default" /> |
-                @Html.ActionLink("Gå tilbage", "Index")
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Tilbage til listen", "Index")
             </div>
         }
     </div>

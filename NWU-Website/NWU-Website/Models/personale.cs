@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace NWU_Website.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class personale
+    
+    public partial class Personale
     {
         public int personaleID { get; set; }
         public string fornavn { get; set; }
         public string efternavn { get; set; }
-        [DisplayName("Brugernavn")]
-        [Required(ErrorMessage ="Skal udfyldes")]
+        
         public string brugernavn { get; set; }
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Skal udfyldes")]
-        public string password { get; set; }
+        public string adgangskode { get; set; }
         public int rolleID { get; set; }
-
         public string LoginErrorMessage { get; set; }
     }
 }

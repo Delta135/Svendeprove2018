@@ -1,0 +1,53 @@
+﻿@charset "utf-8"; /*Sikre du kan skrive æ ø og å*/
+#navMenu {
+    margin:0;
+    padding:0;
+}
+#navMenu ul {
+    margin:0;
+    padding:0;
+    line-height:30px;
+}
+#navMenu li {
+    margin:0;
+    padding:0;
+    list-style:none;
+    float:left;
+    position:relative;
+    background:#999; /*Baggrundsfarven for links*/
+}
+#navMenu ul li a {
+    text-align:center;
+    font-family:"Comic Sans MS", cursive; /*Links skrifttype*/
+    text-decoration:none; /*Fjerner links understregning*/
+    height:30px; /*Højden på link-bokse*/
+    width:150px; /*Breden på link-bokse*/
+    display:block; /*Link i blok*/
+    color:#FFF; /*Links tekstfarve*/
+    border:1px solid #FFF;
+    text-shadow:1px 1px 1px #000; /*Links kant størrelser og farve*/
+}
+#navMenu ul ul {
+    position:absolute;
+    visibility:hidden;
+    top:32px;
+}
+#navMenu ul li:hover ul {
+    visibility:visible;
+}
+/*****************************************************/
+#navMenu li:hover {
+    background:#09F; /*Overordnet links "mus over" farve*/
+}
+#navMenu ul li:hover ul li a:hover {
+    background:#CCC; /*Underlinks "mus over" farve*/
+    color:#000; /*Underlinks "mus over" tekstfarve*/
+}
+#navMenu a:hover {
+    color:#000; /*Links "mus over" tekstfarve mens musen er på linket*/
+}
+.clearFloat {
+    clear:both;
+    margin:0;
+    padding:0;
+}
