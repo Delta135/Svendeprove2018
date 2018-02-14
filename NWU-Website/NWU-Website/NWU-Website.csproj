@@ -173,7 +173,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserAccountModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\VagtCentralChartsValues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
