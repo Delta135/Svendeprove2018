@@ -128,12 +128,33 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VagtCentralController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AESCryptography.cs" />
+    <Compile Include="Models\ChartData.cs" />
+    <Compile Include="Models\ChartModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChartModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChartModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\checkIND.cs">
+      <DependentUpon>ChartModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\omraade.cs">
+      <DependentUpon>ChartModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Personale.cs">
       <DependentUpon>UserAccountModel.tt</DependentUpon>
     </Compile>
@@ -171,6 +192,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Image\nwulogo1.png" />
+    <Content Include="Models\ChartModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChartModel.edmx</DependentUpon>
+      <LastGenOutput>ChartModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ChartModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChartModel.edmx</DependentUpon>
+      <LastGenOutput>ChartModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\UserAccountModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserAccountModel.edmx</DependentUpon>
@@ -209,6 +240,13 @@
     </EntityDeploy>
     <Content Include="Models\UserAccountModel.edmx.diagram">
       <DependentUpon>UserAccountModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ChartModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChartModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ChartModel.edmx.diagram">
+      <DependentUpon>ChartModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
