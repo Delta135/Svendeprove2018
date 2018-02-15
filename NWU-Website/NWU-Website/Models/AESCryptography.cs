@@ -8,8 +8,10 @@ using System.Web;
 
 namespace NWU_Website.Models
 {
+    //Alt i denne klasse har Samet Lavet
     public class AESCryptography
     {
+        //Here we gonna encrypt our password when new user gonna be created or updated.
         public static string Encryption(string clearText)
         {
             string EncryptionKey = "STRIKERS9072314";

@@ -10,6 +10,7 @@ using NWU_Website.Models;
 
 namespace NWU_Website.Controllers
 {
+    //Alt på Account controller har Samet Lavet
     public class AccountController : Controller
     {
         private nwuDB1Entities1 db = new nwuDB1Entities1();
@@ -125,13 +126,17 @@ namespace NWU_Website.Controllers
             {
                 var userDetails = db.Personales.SingleOrDefault(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
                 //var userDetails = db.Personales.Single(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
+                
+                //checking if userdetails are the same as null if credentials i
                 if (userDetails == null)
                 {
+                    //If your login information is incorrect, you will receive a warning
                     userModel.LoginErrorMessage = "Wrong username or password.";
                     return View("Index", userModel);
                 }
                 else
                 {
+                    //If its correct you will be redirectet to Index view in accountcontroller
                     Session["userID"] = userDetails.personaleID;
                     Session["userName"] = userDetails.brugernavn;
                     return RedirectToAction("Index", "Account");
