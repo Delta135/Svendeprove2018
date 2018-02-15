@@ -123,31 +123,21 @@ namespace NWU_Website.Controllers
         {
             using (nwuDB1Entities1 db = new nwuDB1Entities1())
             {
-                var userDetails = db.Personales.Where(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode).FirstOrDefault();
+                var userDetails = db.Personales.SingleOrDefault(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
                 //var userDetails = db.Personales.Single(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
-                if (userDetails != null)
+                if (userDetails == null)
                 {
-                    Session["UserID"] = userDetails.personaleID.ToString();
-                    Session["UserName"] = userDetails.brugernavn.ToString();
-                    return RedirectToAction("Index", userModel);
+                    userModel.LoginErrorMessage = "Wrong username or password.";
+                    return View("Index", userModel);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Brugernavn eller adgangskode stemmer ikke.");
+                    Session["userID"] = userDetails.personaleID;
+                    Session["userName"] = userDetails.brugernavn;
+                    return RedirectToAction("Index", "Account");
                 }
-                //    var userDetails = db.Personales.Where(x => x.brugernavn == userModel.brugernavn && x.adgangskode == userModel.adgangskode).FirstOrDefault();
-                //    if (userDetails == null)
-                //    {
-                //        userModel.LoginErrorMessage = "Forkert brugernavn eller adgangskode.";
-                //        return View("Index", userModel);
-                //    }
-                //    else
-                //    {
-                //        Session["personaleID"] = userDetails.personaleID;
-                //        return RedirectToAction("Index", "Home");
-                //    }
-                //}
-                return RedirectToAction("Index","Account");
+             
+               
             }
 
          
