@@ -134,6 +134,7 @@ namespace NWU_Website.Controllers
                     userModel.LoginErrorMessage = "Wrong username or password.";
                     return View("Index", userModel);
                 }
+
                 else
                 {
                     //If its correct you will be redirectet to Index view in accountcontroller

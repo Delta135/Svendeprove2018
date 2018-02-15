@@ -11,11 +11,16 @@ namespace NWU_Website.Models
     //Alt i denne klasse har Samet Lavet
     public class AESCryptography
     {
-        //Here we gonna encrypt our password when new user gonna be created or updated.
+
+
+        //For security measures an encryption method would be nescessary. 
+        //Down below we are encrypting user passwords with an AES Encryption gonna be created or updated.
         public static string Encryption(string clearText)
         {
             string EncryptionKey = "STRIKERS9072314";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+
+            //Create a new instance of the AES Class. This 
             using (Aes encryptor = Aes.Create())
             {
                 Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[]
