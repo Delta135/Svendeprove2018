@@ -24,6 +24,8 @@ namespace ArduinoConnector
             //Test the system by sending random data to the database
             if (args.Contains("testdb".ToLower()))
             {
+                Console.WriteLine("Køre test...");
+                Console.WriteLine("Luk for at afslutte");
                 Utilities.DatabaseTest();
                 Environment.Exit(1);//prevent the rest of the program fom running if testmode has been enabled
             }
@@ -34,12 +36,12 @@ namespace ArduinoConnector
             //Main loop
             while (true)
             {
-                Console.WriteLine("Listening...");
+                Console.WriteLine("Lytter...");
 
                 //start listening for arduinos
                 cm.StartListening();
 
-                Console.WriteLine("Conn get!");
+                Console.WriteLine("Fik forbinelse");
 
                 //read what the arduino is sending
                 workingBuffer = cm.ReadIncommingBuffer();
@@ -47,7 +49,7 @@ namespace ArduinoConnector
                 if (cm.AmountReceived == 0)
                 {
                     //we got nothing return to listion state
-                    Console.WriteLine("Got nothing...");
+                    Console.WriteLine("Ingen forbinelse");
                     cm.CloseStream();
                 }
                 else
@@ -87,9 +89,9 @@ namespace ArduinoConnector
 
                     workingBuffer = new byte[] { testResault };
 
-                    Console.WriteLine("Done");
-                    Console.WriteLine("Will now talk back...");
-                    Console.WriteLine("Send result: " + workingBuffer[0]);
+                    Console.WriteLine("Færdig");
+                    Console.WriteLine("Sender svar");
+                    Console.WriteLine("Sendte: " + workingBuffer[0]);
 
                     //send the resault to the arduino
                     cm.SendBuffer(workingBuffer, 0, workingBuffer.Length);
