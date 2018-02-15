@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ArduinoConnector
@@ -26,6 +27,24 @@ namespace ArduinoConnector
             }
 
             return newDbr;
+        }
+
+        //test the database by sending random data to it
+        public static void DatabaseTest()
+        {
+            DatabaseManager dbMan = new DatabaseManager();
+            Random rng = new Random();
+            bool isCheckedIn = false;
+            bool.TryParse(rng.Next(0,2).ToString(), out isCheckedIn);
+
+            //do it forever
+            while (true)
+            {
+                dbMan.InsertData(rng.Next(1,6), rng.Next(5, 301), isCheckedIn);
+
+                //wait for one second
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+            }
         }
     }
 }

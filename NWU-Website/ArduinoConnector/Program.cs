@@ -21,6 +21,13 @@ namespace ArduinoConnector
 
         static void Main(string[] args)
         {
+            //Test the system by sending random data to the database
+            if (args.Contains("testdb".ToLower()))
+            {
+                Utilities.DatabaseTest();
+                Environment.Exit(1);//prevent the rest of the program fom running if testmode has been enabled
+            }
+
             cm = new ConnectionManager(arduinoIp, arduinoPort);
             dbMan = new DatabaseManager();
 

@@ -53,6 +53,24 @@ namespace ArduinoConnector
             return 1;
         }
 
+        public void InsertData(int areaId, int currentInArea, bool checkedIn)
+        {
+            using (sqlConn = new SqlConnection(sqlConnectionString))
+            {
+                sqlQurry = "INSERT INTO dbo.* (table1, table2) VALUES (@table1Value, @table2Value)";
+
+                using (sqlcmd = new SqlCommand(sqlQurry, sqlConn))
+                {
+                    sqlcmd.Parameters.AddWithValue("@table1Value", "Value1");
+                    sqlcmd.Parameters.AddWithValue("@table2Value", "Value2");
+
+                    sqlConn.Open();
+                    sqlcmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
         //retive carddata from the database
         private DatabaseResult getCardData()
         {
