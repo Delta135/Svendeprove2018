@@ -79,8 +79,8 @@
             //Here we set Max Numbers and other visual options - Claus
             var options = {
                 max: @Model.MaxNumber.ElementAt(1),
-                redFrom: 370, redTo: 400,
-                yellowFrom: 330, yellowTo: 370,
+                redFrom: 270, redTo: 300,
+                yellowFrom: 225, yellowTo: 270,
                 minorTicks: 1
             };
 
@@ -94,21 +94,20 @@
             chart.draw(data, options);
         }
 
-
          //Method draw a Gauge chart with text, color and numbers - Claus
         function draw3Chart() {
-             var name = "@Model.AreaNames.ElementAt(2)";
+
             // Model.Tal3 is the value from database - Claus
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                [name, 3]
+                ['Minigolf', 0]
             ]);
 
             //Here we set Max Numbers and other visual options - Claus
             var options = {
-                max: @Model.MaxNumber.ElementAt(2),
-                redFrom: 180, redTo: 200,
-                yellowFrom: 150, yellowTo: 180,
+                max: 160,
+                redFrom: 144, redTo: 160,
+                yellowFrom: 120, yellowTo: 144,
                 minorTicks: 1
             };
 
@@ -116,230 +115,152 @@
             var chart = new google.visualization.Gauge(document.getElementById('chart_div3'));
 
             //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(2));
+            data.setValue(0, 1, 0);
 
             //Draw chart with data and options - Claus
             chart.draw(data, options);
         }
 
-        //Method draw a Gauge chart with text, color and numbers - Claus
+         //Method draw a Gauge chart with text, color and numbers - Claus
         function draw4Chart() {
-             var name = "@Model.AreaNames.ElementAt(3)";
-            // Model.Tal3 is the value from database - Claus
+
+            // Model.Tal1 is the value from database - Claus
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                [name, 4]
+                ['Abeland', 0]
             ]);
 
             //Here we set Max Numbers and other visual options - Claus
             var options = {
-                max: @Model.MaxNumber.ElementAt(3),
-                redFrom: 90, redTo: 100,
-                yellowFrom: 70, yellowTo: 90,
-                minorTicks: 1
-            };
-
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div4'));
-
-            //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(3));
-
-            //Draw chart with data and options - Claus
-            chart.draw(data, options);
-        }
-
-
-
-        function draw5Chart() {
-             var name = "@Model.AreaNames.ElementAt(4)";
-            // Model.Tal3 is the value from database - Claus
-            var data = google.visualization.arrayToDataTable([
-                ['Label', 'Value'],
-                [name, 5]
-            ]);
-
-            //Here we set Max Numbers and other visual options - Claus
-            var options = {
-                max: @Model.MaxNumber.ElementAt(4),
+                max: 300,
                 redFrom: 270, redTo: 300,
-                yellowFrom: 240, yellowTo: 270,
+                yellowFrom: 225, yellowTo: 270,
                 minorTicks: 1
             };
 
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div5'));
-
-            //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(4));
-
-            //Draw chart with data and options - Claus
-            chart.draw(data, options);
-        }
-
-        function draw6Chart() {
-             var name = "@Model.AreaNames.ElementAt(5)";
-            // Model.Tal3 is the value from database - Claus
-            var data = google.visualization.arrayToDataTable([
-                ['Label', 'Value'],
-                [name, 6]
-            ]);
-
-            //Here we set Max Numbers and other visual options - Claus
-            var options = {
-                max: @Model.MaxNumber.ElementAt(5),
-                redFrom: 230, redTo: 250,
-                yellowFrom: 200, yellowTo: 230,
-                minorTicks: 1
-            };
-
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div4 - Claus
             var chart = new google.visualization.Gauge(document.getElementById('chart_div6'));
 
             //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(5));
+            data.setValue(0, 1, 0);
 
             //Draw chart with data and options - Claus
             chart.draw(data, options);
         }
 
-               function draw7Chart() {
-             var name = "@Model.AreaNames.ElementAt(6)";
-            // Model.Tal3 is the value from database - Claus
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw5Chart() {
+
+            // Model.Tal1 is the value from database - Claus
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                [name, 7]
+                ['Vandfald', 0]
             ]);
 
             //Here we set Max Numbers and other visual options - Claus
             var options = {
-                max: @Model.MaxNumber.ElementAt(6),
-                redFrom: 230, redTo: 250,
-                yellowFrom: 200, yellowTo: 230,
+                max: 100,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
                 minorTicks: 1
             };
 
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div5 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div5'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, 0);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw6Chart() {
+
+            // Model.Tal6 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Soppebassin', 0]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 160,
+                redFrom: 144, redTo: 160,
+                yellowFrom: 120, yellowTo: 144,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div6 - Claus
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div4'));
+
+            //Set Gauge value from database - Claus
+            data.setValue(0, 1, 0);
+
+            //Draw chart with data and options - Claus
+            chart.draw(data, options);
+        }
+
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw7Chart() {
+
+            // Model.Tal1 is the value from database - Claus
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Fitness', 0]
+            ]);
+
+            //Here we set Max Numbers and other visual options - Claus
+            var options = {
+                max: 200,
+                redFrom: 180, redTo: 200,
+                yellowFrom: 150, yellowTo: 180,
+                minorTicks: 1
+            };
+
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div7 - Claus
             var chart = new google.visualization.Gauge(document.getElementById('chart_div7'));
 
             //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(6));
+            data.setValue(0, 1, 0);
 
             //Draw chart with data and options - Claus
             chart.draw(data, options);
         }
 
-              function draw8Chart() {
-             var name = "@Model.AreaNames.ElementAt(7)";
-            // Model.Tal3 is the value from database - Claus
+         //Method draw a Gauge chart with text, color and numbers - Claus
+        function draw8Chart() {
+
+            // Model.Tal1 is the value from database - Claus
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                [name, 8]
+                ['Cafe', 0]
             ]);
 
             //Here we set Max Numbers and other visual options - Claus
             var options = {
-                max: @Model.MaxNumber.ElementAt(7),
-                redFrom: 270, redTo: 300,
-                yellowFrom: 220, yellowTo: 270,
+                max: 100,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
                 minorTicks: 1
             };
 
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
+            // Create a chart of type Gauge and place it in the <body> where id = chart_div8 - Claus
             var chart = new google.visualization.Gauge(document.getElementById('chart_div8'));
 
             //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(7));
+            data.setValue(0, 1, 0);
 
             //Draw chart with data and options - Claus
             chart.draw(data, options);
         }
 
-
-        function draw9Chart() {
-             var name = "@Model.AreaNames.ElementAt(8)";
-            // Model.Tal3 is the value from database - Claus
-            var data = google.visualization.arrayToDataTable([
-                ['Label', 'Value'],
-                [name, 9]
-            ]);
-
-            //Here we set Max Numbers and other visual options - Claus
-            var options = {
-                max: @Model.MaxNumber.ElementAt(8),
-                redFrom: 90, redTo: 100,
-                yellowFrom: 70, yellowTo: 90,
-                minorTicks: 1
-            };
-
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div9'));
-
-            //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(8));
-
-            //Draw chart with data and options - Claus
-            chart.draw(data, options);
-              }
-
-              function draw10Chart() {
-             var name = "@Model.AreaNames.ElementAt(9)";
-            // Model.Tal3 is the value from database - Claus
-            var data = google.visualization.arrayToDataTable([
-                ['Label', 'Value'],
-                [name, 10]
-            ]);
-
-            //Here we set Max Numbers and other visual options - Claus
-            var options = {
-                max: @Model.MaxNumber.ElementAt(9),
-                redFrom: 230, redTo: 250,
-                yellowFrom: 200, yellowTo: 230,
-                minorTicks: 1
-            };
-
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div10'));
-
-            //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(9));
-
-            //Draw chart with data and options - Claus
-            chart.draw(data, options);
-        }
-
-
-               function draw11Chart() {
-             var name = "@Model.AreaNames.ElementAt(10)";
-            // Model.Tal3 is the value from database - Claus
-            var data = google.visualization.arrayToDataTable([
-                ['Label', 'Value'],
-                [name, 11]
-            ]);
-
-            //Here we set Max Numbers and other visual options - Claus
-            var options = {
-                max: @Model.MaxNumber.ElementAt(10),
-                redFrom: 230, redTo: 250,
-                yellowFrom: 200, yellowTo: 230,
-                minorTicks: 1
-            };
-
-            // Create a chart of type Gauge and place it in the <body> where id = chart_div3 - Claus
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div11'));
-
-            //Set Gauge value from database - Claus
-            data.setValue(0, 1, @Model.CurrentNumber.ElementAt(10));
-
-            //Draw chart with data and options - Claus
-            chart.draw(data, options);
-        }
-       
 
     </script>
 </head>
 
-<body style="background-color:white;">
+<body style="background-color:midnightblue;">
 
     @*Ved at pakke alt ind i <div></div> og bruge col-lg-tal
         kan vi styre placering af de 8 Gauge-meter og alt tekst - Claus*@
@@ -347,63 +268,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12" align="center">
-                    <h1 style="color:dimgrey;font-family:verdana;">Nordic Water Universe</h1>
+                    <h1 style="color:white;font-family:verdana;">Nordic Water Universe</h1>
                 </div>
             </div>
-            <br />
-            <br/>
-            <div class="text-center">
-                <h2> Indendørsaktiviteter</h2>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                        <div id="chart_div1" style="width: 290px; height: 180px;"></div>
-                    </div>
-                    <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                        <div id="chart_div2" style="width: 290px; height: 180px;"></div>
-                    </div>
-                    <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                        <div id="chart_div3" style="width: 290px; height: 180px;"></div>
-                    </div>
-                </div>
 
-                <br />
-                <div class="text-center">
-                    <h2> Aquarpark</h2>
-                </div>
-                <div>
-                    <div class="row">
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div4" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div5" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div6" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div7" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div8" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div9" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div10" style="width: 290px; height: 180px;"></div>
-                        </div>
-                        <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:white;">
-                            <div id="chart_div11" style="width: 290px; height: 180px;"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-         
-            @*<div class="row">
+            <div class="row">
                 <div class="col-lg-12" align="center">
                     <h2 style="color:white;font-family:verdana;">Vagtcentral</h2>
                 </div>
@@ -420,8 +289,8 @@
                     <h4 style="color:white;font-family:verdana;">Vagt Områder</h4>
                 </div>
                 <div class="col-lg-1"></div>
-            </div>*@
-            @*<div class="ppp">
+            </div>
+            <div class="ppp">
                 <div style="display:inline-block">
                     <div class="col-lg-1" style="background-color:midnightblue;"></div>
 
@@ -469,7 +338,7 @@
 
                     <div class="col-lg-1" style="background-color:midnightblue;"></div>
                 </div>
-            </div>*@
+            </div>
         </div>
     </div>
 </body>
