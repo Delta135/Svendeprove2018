@@ -4,17 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NWU_Website.Models;
-using System.Threading;
 
 namespace NWU_Website.Controllers
 {
-    public class VagtCentralController : Controller
+    public class LivredderController : Controller
     {
-        // GET: VagtCentral
+        // GET: Livredder
         public ActionResult Index()
-
         {
-
             // Obejct who holds data we send to View and can use with @Model.? - Claus
 
             //VagtCentralChartsValues vcObj = new VagtCentralChartsValues();
@@ -272,56 +269,5 @@ namespace NWU_Website.Controllers
             return View(chartData);
 
         }
-
-
-
-
-
-        public ActionResult RunningDemo()
-
-        {
-
-
-
-            return View();
-
-        }
-
-
-
-        public ActionResult ShowHistoryData(int? area, string dato)
-        {
-
-            HistoryData ttc = new HistoryData();
-            nwuDB1Entities3 db = new nwuDB1Entities3();
-
-            // if area is assigned a value
-            if (area.HasValue)
-            {
-                // put all data from the table checkIND where kortlaeserID is the same as area into test
-                var test = db.checkINDs.Where(o => o.kortlaeserID == area);
-
-                // sort after date and time
-                test = test.OrderBy(o => o.ckeckIND);
-
-                // we transform a var result to a list<checkIND> result
-                List<checkIND> testRedultater = test.ToList<checkIND>();
-
-
-                ttc.Tal1 = (int)testRedultater.ElementAt(0).antalPersoner; //first result
-                ttc.Tal2 = (int)testRedultater.ElementAt(1).antalPersoner;
-                ttc.Tal3 = (int)testRedultater.ElementAt(2).antalPersoner;
-                ttc.Tal4 = (int)testRedultater.ElementAt(3).antalPersoner;
-                ttc.Tal5 = (int)testRedultater.ElementAt(4).antalPersoner;
-                ttc.Tal6 = (int)testRedultater.ElementAt(5).antalPersoner;
-                ttc.Tal7 = (int)testRedultater.ElementAt(6).antalPersoner;
-                ttc.Tal8 = (int)testRedultater.ElementAt(7).antalPersoner;
-                ttc.Tal9 = (int)testRedultater.ElementAt(8).antalPersoner;
-                ttc.Tal10 = (int)testRedultater.ElementAt(9).antalPersoner;
-                ttc.Tal11 = (int)testRedultater.ElementAt(10).antalPersoner;
-            }
-
-            return View(ttc);
-        }
     }
-}
+    }

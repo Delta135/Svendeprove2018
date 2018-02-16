@@ -132,7 +132,7 @@ namespace NWU_Website.Controllers
                 {
                     //If your login information is incorrect, you will receive a warning
                     userModel.LoginErrorMessage = "Wrong username or password.";
-                    return View("Index", userModel);
+                    return View("Login", userModel);
                 }
 
                 else
