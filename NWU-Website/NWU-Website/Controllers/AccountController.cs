@@ -10,7 +10,7 @@ using NWU_Website.Models;
 
 namespace NWU_Website.Controllers
 {
-    //Alt på Account controller har Samet Lavet 
+    //Alt på Account controller har Samet Lavet
     public class AccountController : Controller
     {
         private nwuDB1Entities1 db = new nwuDB1Entities1();
