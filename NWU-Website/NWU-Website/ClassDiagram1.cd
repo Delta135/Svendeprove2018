@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NWU_Website.Controllers.AccountController">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAACAAAABAAAAAAEAAEACAAEQAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Controllers.HomeController">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Controllers.LivredderController">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\LivredderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Controllers.VagtCentralController">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\VagtCentralController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Controllers.VagtController">
+    <Position X="7.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\VagtController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.AESCryptography">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\AESCryptography.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.ChartData">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAEQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ChartData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.checkIND">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAABAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\checkIND.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.HistoryData">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAgAAAADQPwAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\HistoryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.nwuDB1Entities1">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserAccountModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.nwuDB1Entities2">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\ChartModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.nwuDB1Entities3">
+    <Position X="11" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\HistoryModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.omraade">
+    <Position X="11" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAEBAAAAAA=</HashCode>
+      <FileName>Models\omraade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.Models.Personale">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAIAABABACAAIAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Models\Personale.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NWU_Website.ViewModel.UserViewModel">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\UserViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
