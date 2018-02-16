@@ -10,6 +10,10 @@
 #include <SPI.h>
 
 #pragma region Defines
+/*Genral*/
+#define MYID 1 //the card readers area id
+#define SERVERPORT 1000
+
 /*LCD vars*/
 //RS digital 9
 #define LCDRS 9
@@ -65,11 +69,7 @@
 #define EhternetSPI4 13
 #pragma endregion
 
-//Save in PROGMEM (Flash storge) as we don't need to change it after compile
-//https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
-
 //LCD strings
-//https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/
 const PROGMEM String readCard = "Swipe Armbaand";
 const PROGMEM String wait = "Vent...";
 const PROGMEM String ok = "OK!";
@@ -87,13 +87,15 @@ MFRC522 rfid(RFIDSDA, RFIDRST);
 MFRC522::MIFARE_Key rfKey;
 
 //Setup ethernet
-const PROGMEM byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
-const PROGMEM IPAddress IP = { 128, 0, 0,1 };
+byte MAC[] = {0x90, 0xA2, 0xDA, 0x10, 0x5F, 0x81};
+IPAddress ArduinoIP = { 172, 16, 1, 50};
+IPAddress ServerIP = {172, 16, 1, 4};
 EthernetClient client;
 
 //Test
-const byte cardUID[4] = {172, 12, 63, 213};
+//const byte cardUID[4] = {172, 12, 63, 213};
 const byte UIDlength = 4;
+IPAddress PCIP = { 172, 16, 1, 1 };
 
 void setup() 
 {
@@ -102,28 +104,25 @@ void setup()
 
 	//led
 	Serial.println(F("Setting Up LED..."));
-	pinMode(LEDGREED, OUTPUT);
-	pinMode(LEDRED, OUTPUT);
-
-	digitalWrite(LEDGREED, HIGH);
-	digitalWrite(LEDRED, LOW);
+	initLED();
 
 	//LCD
 	//LCD columns and rows, small is 16 columns on ech row (2 in total)
 	Serial.println(F("Setting Up LCD..."));
-	lcd.begin(LCDCOLUMNS, LCDROWS);
-	lcd.print(readCard);
+	initLCD();
 
 	//RFID
 	Serial.println(F("Setting Up RFID..."));
-	SPI.begin();
-	rfid.PCD_Init();
+	initRFID();
 
 	//Ethernet
+	Serial.println(F("Setting Up Ehternet"));
+	initEhternet();
 }
 
 void loop()
 {
+
 	//wait for new card
 	if (!rfid.PICC_IsNewCardPresent())
 		return;
@@ -138,28 +137,70 @@ void loop()
 	// Stop encryption on PCD
 	rfid.PCD_StopCrypto1();
 
+	//a card was used display wait
 	printLCDAndSerial(wait);
 	digitalWrite(LEDGREED, LOW);
 	digitalWrite(LEDRED, HIGH);
 	
 	//simulate network
-	delay(1000);
+	//delay(1000);
 
-	//temp
-	if (checkUID(rfid.uid.uidByte, cardUID, UIDlength))
+	//real network
+	byte bufferWithID[5];
+
+	for (size_t i = 0; i < 4; i++)
 	{
+		bufferWithID[i] = rfid.uid.uidByte[i];
+	}
+	bufferWithID[4] = MYID;
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		Serial.print(bufferWithID[i]), Serial.print(",");
+	}
+
+	client.write(bufferWithID, 5);
+	Serial.println(F("Sendt data."));
+
+	Serial.println(F("Got:"));
+	uint8_t *rbuffer;
+	size_t buffersize = 1;
+	/*rbuffer =*/ client.readBytes(rbuffer, buffersize);
+	Serial.println(*rbuffer);
+
+	switch (*rbuffer)
+	{
+	case 0:
+		printLCDAndSerial(denied);
+		digitalWrite(LEDGREED, LOW);
+		digitalWrite(LEDRED, LOW);
+		break;
+	case 1:
 		printLCDAndSerial(ok);
 		digitalWrite(LEDGREED, HIGH);
 		digitalWrite(LEDRED, LOW);
-	}
-	else
-	{
+		break;
+	case 2:
+		printLCDAndSerial(ok);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+		break;
+	case 3:
+		printLCDAndSerial(tooManyRow1);
+		lcd.setCursor(0, 2);
+		lcd.print(tooManyRow2);
+		digitalWrite(LEDGREED, HIGH);
+		digitalWrite(LEDRED, LOW);
+		break;
+	default:
 		printLCDAndSerial(error);
 		digitalWrite(LEDGREED, LOW);
 		digitalWrite(LEDRED, LOW);
+		break;
 	}
 
-	delay(1000);
+	//show the message for 2 sec
+	delay(2000);
 
 	printLCDAndSerial(readCard);
 	digitalWrite(LEDGREED, HIGH);
@@ -174,32 +215,86 @@ void printLCDAndSerial(const String &msg)
 	Serial.println(msg);
 }
 
-//TODO
 void initLED()
 {
+	pinMode(LEDGREED, OUTPUT);
+	pinMode(LEDRED, OUTPUT);
 
+	digitalWrite(LEDGREED, HIGH);
+	digitalWrite(LEDRED, LOW);
 }
 
-//TODO
 void initLCD()
 {
-
+	lcd.begin(LCDCOLUMNS, LCDROWS);
+	lcd.print(readCard);
 }
 
-//TODO
-void initREID()
+void initRFID()
 {
-
+	SPI.begin();
+	rfid.PCD_Init();
 }
 
-//TODO
 void initEhternet()
 {
+	//Use to connect to server
+	if (Ethernet.begin(MAC) == 1)
+	{
+		Serial.println(F("Ehternet config done."));
+	}
+	else
+	{
+		Serial.println(F("Ehternet config failed."));
 
+		//do nothing forever
+		for (;;) {}
+	}
+
+	//Ethernet.begin(MAC, ArduinoIP); //use to connect to pc
+
+	//a delay here seems to give more stabilaty when connecting
+	delay(1000);
+
+	if (client.connect(ServerIP, SERVERPORT))
+	//if (client.connect(PCIP, SERVERPORT))
+	{
+		Serial.println(F("Connected!"));
+
+		Serial.println(F("IP:"));
+		Serial.println(Ethernet.localIP());
+
+		//C#
+		/*client.write(cardUID, 4);
+		Serial.println(F("Sendt data."));
+
+		//delay
+		//delay(1000);
+
+		//recive data
+		Serial.println(F("Got:"));
+		String recive = client.readString();
+		Serial.println(recive);
+
+		for (;;) {}*/
+	}
+	else
+	{
+		Serial.println(F("Connection failed"));
+
+		//stop the arduino form keeping connecting
+		for (;;) {}
+	}
 }
 
 //TODO
-void LCDPrint(const String &msg)
+void LCDPrintNew(const String &msg)
+{
+
+}
+
+//print a messege on the first row and the 2ed row
+void LCDPrintNew(const String &msg, const String &msg2)
 {
 
 }
@@ -239,15 +334,13 @@ bool getResponse()
 //debug
 bool checkUID(const byte *UID1, const byte *UID2, const byte &UIDSize)
 {
-	bool match = true;
 	for (byte i = 0; i < UIDSize; i++)
 	{
 		if (UID1[i] != UID2[i])
 		{
-			match = false;
-			break;
+			return false;
 		}
 	}
 
-	return match;
+	return true;
 }
