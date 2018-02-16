@@ -12,6 +12,7 @@ namespace NWU_Website.Models
     public class AESCryptography
     {
 
+        // Method for Encryption
 
         //For security measures an encryption method is nescessary. 
         //Down below we are using AES encryption to encrypt our user passwords.
@@ -44,6 +45,7 @@ namespace NWU_Website.Models
             return clearText;
         }
 
+        // Method for Decryption
         public static string Decrypt(string cipherText)
         {
             string EncryptionKey = "STRIKERS9072314";

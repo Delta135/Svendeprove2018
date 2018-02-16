@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace NWU_Website.Models
 {
     using System;
@@ -19,11 +17,8 @@ namespace NWU_Website.Models
         public int personaleID { get; set; }
         public string fornavn { get; set; }
         public string efternavn { get; set; }
-        
         public string brugernavn { get; set; }
-        [DataType(DataType.Password)]
         public string adgangskode { get; set; }
         public int rolleID { get; set; }
-        public string LoginErrorMessage { get; set; }
     }
 }
