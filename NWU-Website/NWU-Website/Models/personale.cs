@@ -11,14 +11,18 @@ namespace NWU_Website.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Personale
     {
         public int personaleID { get; set; }
         public string fornavn { get; set; }
         public string efternavn { get; set; }
         public string brugernavn { get; set; }
+        [DataType(DataType.Password)]
         public string adgangskode { get; set; }
         public int rolleID { get; set; }
+
+        public string LoginErrorMessage { get; set; }
     }
 }

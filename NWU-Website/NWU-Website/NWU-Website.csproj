@@ -174,12 +174,6 @@
       <DependentUpon>HistoryDatamodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistoryData.cs" />
-    <Compile Include="Models\HistoryDatamodel.Context.cs" />
-    <Compile Include="Models\HistoryDatamodel.Context1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HistoryDatamodel.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HistoryDatamodel.cs" />
     <Compile Include="Models\HistoryDatamodel.Designer.cs">
       <DependentUpon>HistoryDatamodel.cs</DependentUpon>
@@ -250,10 +244,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ChartModel.edmx</DependentUpon>
       <LastGenOutput>ChartModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\HistoryDatamodel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HistoryDatamodel.Context1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\HistoryDatamodel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
