@@ -1,0 +1,95 @@
+﻿@model NWU_Website.Models.HistoryData
+@using NWU_Website.Controllers;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    @*Get and load Google Charts loader - Claus*@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawStacked);
+        function drawStacked() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('timeofday', 'Tid på dagen');
+            data.addColumn('number', 'Besøgende');
+
+            data.addRows([
+                [{ v: [7, 0, 0], f: '7:00' }, @Model.Tal1],
+                [{ v: [8, 0, 0], f: '8:00' }, @Model.Tal2],
+                [{ v: [9, 0, 0], f: '9:00' }, @Model.Tal3],
+                [{ v: [10, 0, 0], f: '10:00' }, @Model.Tal4],
+                [{ v: [11, 0, 0], f: '11:00' }, @Model.Tal5],
+                [{ v: [12, 0, 0], f: '12:00' }, @Model.Tal6],
+                [{ v: [13, 0, 0], f: '13:00' }, @Model.Tal7],
+                [{ v: [14, 0, 0], f: '14:00' }, @Model.Tal8],
+                [{ v: [15, 0, 0], f: '15:00' }, @Model.Tal9],
+                [{ v: [16, 0, 0], f: '16:00' }, @Model.Tal10],
+                [{ v: [17, 0, 0], f: '17:00' }, @Model.Tal11],
+            ]);
+
+            var options = {
+                title: 'Antal besøgende på et bestemt tidpunkt af dagen',
+                isStacked: true,
+                hAxis: {
+                    title: 'Tid på Dagen',
+                    format: 'h:mm a',
+                    viewWindow: {
+                        min: [6, 30, 0],
+                        max: [17, 30, 0]
+                    }
+                },
+                vAxis: {
+                    title: 'Besøgende'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+            chart.draw(data, options);
+        }
+    </script>
+
+
+
+
+</head>
+<body>
+    
+    @using (Html.BeginForm("ShowHistoryData", "VagtCentral", FormMethod.Get))
+    {
+
+        <div class="row form-group">
+
+            <div class="col-md-2">
+                <form action="">
+                    <input type="radio" name="area" value="1"> Minigolf<br>
+                    <input type="radio" name="area" value="2"> Abeland<br>
+                    <input type="radio" name="area" value="3"> Fitness<br>
+                    <input type="radio" name="area" value="4"> Cafe<br>
+                    <input type="radio" name="area" value="11"> Vandfald<br>
+                    <input type="radio" name="area" value="10"> Bølgebassin<br>
+                    <input type="radio" name="area" value="8"> Splashbassin<br>
+                    <input type="radio" name="area" value="9"> Soppebassin<br>
+
+                </form>
+            </div>
+
+            <div class="col-md-2">
+                @Html.TextBox("dato", "{0:yyyy-MM-dd HH:mm:ss}", new { @class = "date-picker", @type = "date" })
+            </div>
+
+          
+            <button type="submit" class="btn btn-default">Hent</button>
+        </div>
+
+    }
+
+    <div id="columnchart_values" style="width: 1150px; height: 350px;"></div>
+</body>
+</html>
+
+
+
+
+
+
