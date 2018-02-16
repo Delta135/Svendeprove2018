@@ -8,12 +8,23 @@ using System.Web;
 
 namespace NWU_Website.Models
 {
+    //Alt i denne klasse har Samet Lavet
     public class AESCryptography
     {
+
+
+        //For security measures an encryption method is nescessary. 
+        //Down below we are using AES encryption to encrypt our user passwords.
+        //AES is a symmetric algorithm which is a private-key cryptography..
+
+        //TODO:
+        //The below methods are to be called in the Create and Authorize methods in 
+        //the AccountController class when we need to store our encrypted passwords and verify user entries
         public static string Encryption(string clearText)
         {
             string EncryptionKey = "STRIKERS9072314";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+
             using (Aes encryptor = Aes.Create())
             {
                 Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[]

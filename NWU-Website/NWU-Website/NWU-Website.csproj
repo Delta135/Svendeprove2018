@@ -309,6 +309,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\VagtCentral\Index.cshtml" />
     <Content Include="Views\VagtCentral\RunningDemo.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
