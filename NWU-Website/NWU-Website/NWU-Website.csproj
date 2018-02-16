@@ -133,17 +133,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModel.Context.cs">
+    <Compile Include="Models\AccountModel.Context.cs" />
+    <Compile Include="Models\AccountModel.Context1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModel.cs">
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AccountModel.Designer.cs">
+      <DependentUpon>AccountModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModel1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModel.Designer.cs">
+    <Compile Include="Models\AccountModel1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountModel.edmx</DependentUpon>
@@ -169,17 +174,22 @@
       <DependentUpon>HistoryDatamodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistoryData.cs" />
-    <Compile Include="Models\HistoryDatamodel.Context.cs">
+    <Compile Include="Models\HistoryDatamodel.Context.cs" />
+    <Compile Include="Models\HistoryDatamodel.Context1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HistoryDatamodel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HistoryDatamodel.cs">
+    <Compile Include="Models\HistoryDatamodel.cs" />
+    <Compile Include="Models\HistoryDatamodel.Designer.cs">
+      <DependentUpon>HistoryDatamodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HistoryDatamodel1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HistoryDatamodel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HistoryDatamodel.Designer.cs">
+    <Compile Include="Models\HistoryDatamodel1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
@@ -188,7 +198,7 @@
       <DependentUpon>ChartModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Personale.cs">
-      <DependentUpon>UserAccountModel.tt</DependentUpon>
+      <DependentUpon>AccountModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserAccountModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -225,13 +235,11 @@
     <Content Include="Image\nwulogo1.png" />
     <Content Include="Models\AccountModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AccountModel.edmx</DependentUpon>
-      <LastGenOutput>AccountModel.Context.cs</LastGenOutput>
+      <LastGenOutput>AccountModel.Context1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\AccountModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AccountModel.edmx</DependentUpon>
-      <LastGenOutput>AccountModel.cs</LastGenOutput>
+      <LastGenOutput>AccountModel1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ChartModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -245,13 +253,11 @@
     </Content>
     <Content Include="Models\HistoryDatamodel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
-      <LastGenOutput>HistoryDatamodel.Context.cs</LastGenOutput>
+      <LastGenOutput>HistoryDatamodel.Context1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\HistoryDatamodel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
-      <LastGenOutput>HistoryDatamodel.cs</LastGenOutput>
+      <LastGenOutput>HistoryDatamodel1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\UserAccountModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -299,18 +305,19 @@
     <Content Include="Models\ChartModel.edmx.diagram">
       <DependentUpon>ChartModel.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\AccountModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AccountModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AccountModel.edmx.diagram">
-      <DependentUpon>AccountModel.edmx</DependentUpon>
     <EntityDeploy Include="Models\HistoryDatamodel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HistoryDatamodel.Designer.cs</LastGenOutput>
+      <LastGenOutput>HistoryDatamodel1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\HistoryDatamodel.edmx.diagram">
       <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AccountModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AccountModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AccountModel.edmx.diagram">
+      <DependentUpon>AccountModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -360,17 +367,24 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\VagtCentral\Index.cshtml" />
     <Content Include="Views\VagtCentral\RunningDemo.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\VagtCentral\ShowHistoryData.cshtml" />
     <Content Include="Views\Livredder\Index.cshtml" />
     <Content Include="Views\Vagt\Index.cshtml" />
-    <Content Include="Views\VagtCentral\ShowHistoryData.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
