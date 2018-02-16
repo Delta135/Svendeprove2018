@@ -150,23 +150,7 @@
       <DependentUpon>ChartModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\checkIND.cs">
-      <DependentUpon>HistoryDatamodel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HistoryData.cs" />
-    <Compile Include="Models\HistoryDatamodel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HistoryDatamodel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HistoryDatamodel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HistoryDatamodel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HistoryDatamodel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
+      <DependentUpon>ChartModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\omraade.cs">
       <DependentUpon>ChartModel.tt</DependentUpon>
@@ -217,16 +201,6 @@
       <DependentUpon>ChartModel.edmx</DependentUpon>
       <LastGenOutput>ChartModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\HistoryDatamodel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
-      <LastGenOutput>HistoryDatamodel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\HistoryDatamodel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
-      <LastGenOutput>HistoryDatamodel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\UserAccountModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserAccountModel.edmx</DependentUpon>
@@ -272,13 +246,6 @@
     </EntityDeploy>
     <Content Include="Models\ChartModel.edmx.diagram">
       <DependentUpon>ChartModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\HistoryDatamodel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HistoryDatamodel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\HistoryDatamodel.edmx.diagram">
-      <DependentUpon>HistoryDatamodel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -342,7 +309,6 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\VagtCentral\Index.cshtml" />
     <Content Include="Views\VagtCentral\RunningDemo.cshtml" />
-    <Content Include="Views\VagtCentral\ShowHistoryData.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
