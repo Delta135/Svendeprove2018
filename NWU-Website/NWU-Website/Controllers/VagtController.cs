@@ -1,19 +1,17 @@
-﻿using System;
+﻿using NWU_Website.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NWU_Website.Models;
-using System.Threading;
 
 namespace NWU_Website.Controllers
 {
-    public class VagtCentralController : Controller
+    public class VagtController : Controller
     {
-        // GET: VagtCentral
+        // GET: Vagt
         public ActionResult Index()
         {
-            // Obejct who holds data we send to View and can use with @Model.? - Claus
             //VagtCentralChartsValues vcObj = new VagtCentralChartsValues();
             ChartData chartData = new ChartData();
 
@@ -142,14 +140,5 @@ namespace NWU_Website.Controllers
             // return the object to the View - Claus
             return View(chartData);
         }
-
-
-        public ActionResult RunningDemo()
-        {
-
-            return View();
-        }
-
-     
     }
 }

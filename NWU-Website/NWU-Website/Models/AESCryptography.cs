@@ -10,6 +10,8 @@ namespace NWU_Website.Models
 {
     public class AESCryptography
     {
+
+        // Method for Encryption
         public static string Encryption(string clearText)
         {
             string EncryptionKey = "STRIKERS9072314";
@@ -33,6 +35,7 @@ namespace NWU_Website.Models
             return clearText;
         }
 
+        // Method for Decryption
         public static string Decrypt(string cipherText)
         {
             string EncryptionKey = "STRIKERS9072314";

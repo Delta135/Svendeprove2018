@@ -125,15 +125,17 @@ namespace NWU_Website.Controllers
             {
                 var userDetails = db.Personales.Where(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode).FirstOrDefault();
                 //var userDetails = db.Personales.Single(p => p.brugernavn == userModel.brugernavn && p.adgangskode == userModel.adgangskode);
-                if (userDetails != null)
+                if (userDetails == null)
+                {
+                    ModelState.AddModelError("", "Brugernavn eller adgangskode stemmer ikke.");
+                   
+                }
+                else
                 {
                     Session["UserID"] = userDetails.personaleID.ToString();
                     Session["UserName"] = userDetails.brugernavn.ToString();
                     return RedirectToAction("Index", userModel);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Brugernavn eller adgangskode stemmer ikke.");
+                    
                 }
                 //    var userDetails = db.Personales.Where(x => x.brugernavn == userModel.brugernavn && x.adgangskode == userModel.adgangskode).FirstOrDefault();
                 //    if (userDetails == null)
